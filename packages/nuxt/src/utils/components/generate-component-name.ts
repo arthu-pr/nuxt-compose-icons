@@ -1,4 +1,4 @@
-import type { NuxtComposeIconsOptions } from '../../module';
+import type { IconComponentOptions } from '../../module';
 import { toKebabCase, toPascalCase } from '../convert-cases';
 
 /**
@@ -38,8 +38,8 @@ function isNonEmptyString(input: unknown): input is string {
   return typeof input === 'string' && input.length > 0;
 }
 
-export function generateComponentName(fileName: string, options: NuxtComposeIconsOptions): string {
-  const { prefix, suffix, case: _case } = options.generatedComponentOptions;
+export function generateComponentName(fileName: string, options: IconComponentOptions): string {
+  const { prefix, suffix, case: _case } = options;
 
   const normalizedBaseComponentName = normalizeComponentName(fileName);
   const parts = normalizedBaseComponentName.split('-'); // for later suffix checks

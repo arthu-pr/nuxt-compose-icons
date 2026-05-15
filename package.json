@@ -36,6 +36,7 @@
     "test": "vitest",
     "test3": "pnpm --filter nuxt-compose-icons test",
     "test:e2e": "vitest --project e2e",
+    "test:showcase": "pnpm --filter runtime-showcase test",
     "test:unit": "vitest --project unit",
     "typedoc": "typedoc"
   },

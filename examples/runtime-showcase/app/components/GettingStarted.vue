@@ -39,12 +39,10 @@ const codeConfig = `// nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['nuxt-compose-icons'],
   composeIcons: {
-    // optional configuration
-    pathToIcons: './app/assets/icons', // path to your initial SVG icons
-    generatedComponentOptions: {
-      suffix: 'Icon',
+    pathToIcons: './assets/icons',
+    component: {
+      suffix: 'Icon',   // → <ArrowUpIcon />
       case: 'pascal',
-      componentsDestDir: './app/components/ui/icons',
     },
   },
 });`;
@@ -63,19 +61,18 @@ const codeVue = `<template>
 </template>
 `;
 
-const codeDotNuxt = `/* At build time, 
-* You will be able to see the injected components.ts inside your .nuxt directory
-* The path will be the path of the module with a subdirectory "icons-generated"
+const codeDotNuxt = `/* At build time, generated components appear in .nuxt/components.d.ts
+* Each SVG becomes a fully typed Vue component
 */
 
-'AddNoteIcon': typeof import("../icons-generated/AddNoteIcon.vue")['default'];
-'DeleteIcon': typeof import("../icons-generated/DeleteIcon.vue")['default'];
-'EditIcon': typeof import("../icons-generated/EditIcon.vue")['default'];
-'SettingsIcon': typeof import("../icons-generated/SettingsIcon.vue")['default'];
-'SlideRightIcon': typeof import("../icons-generated/SlideRightIcon.vue")['default'];
-'TimeIcon': typeof import("../icons-generated/TimeIcon.vue")['default'];
+'AddNoteIcon': typeof import("../compose-icons/AddNoteIcon.ts")['default'];
+'DeleteIcon': typeof import("../compose-icons/DeleteIcon.ts")['default'];
+'EditIcon': typeof import("../compose-icons/EditIcon.ts")['default'];
+'SettingsIcon': typeof import("../compose-icons/SettingsIcon.ts")['default'];
+'SlideRightIcon': typeof import("../compose-icons/SlideRightIcon.ts")['default'];
+'TimeIcon': typeof import("../compose-icons/TimeIcon.ts")['default'];
 
-// with all your own components`;
+// alongside all your own components`;
 
 const arrayCode = [
   {

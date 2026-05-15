@@ -20,8 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "composite": true,
-    "baseUrl": "."
+    "composite": true
   },
   "include": ["packages/**/*", "docs/**/*"],
   "exclude": ["node_modules", "dist", ".nuxt"]

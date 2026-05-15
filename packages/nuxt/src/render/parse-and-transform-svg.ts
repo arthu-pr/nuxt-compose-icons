@@ -79,14 +79,11 @@ function convertNodeToVNode(node: string | SvgNode): string | null {
   return `h('${tag}', ${propsLiteral}, [${children}])`;
 }
 
-/*
- * TODO: Description
- */
 /**
- * Description placeholder
+ * Transforms SVG attributes into a format suitable for Vue components, populating CSS variables for dynamic styling.
  *
  * @param {Record<string, string | number>} attrs
- * @returns {Record<string, string | number>}
+ * @returns {Record<string, string | number>} // Transformed attributes with populated CSS variables
  */
 function transformAttributes(
   attrs: Record<string, string | number>,
@@ -114,7 +111,7 @@ function transformAttributes(
  *
  * @export
  * @param {string} svgContent
- * @returns {ParsedSvgResult}
+ * @returns {ParsedSvgResult} - An object containing the transformed attributes and children for the SVG element.
  */
 export function parseAndTransformSvg(svgContent: string): ParsedSvgResult {
   const svgParentNode = convertSVGToHast(svgContent);

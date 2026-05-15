@@ -4,15 +4,12 @@
     "types": ["@nuxt/schema", "vue"],
     "composite": false
   },
-  "include": [
-    "packages/**/*",
-    "packages/nuxt/src/**/*.ts",
-    "./packages/nuxt/src**/*{spec,test}.ts"
-  ],
+  "include": ["packages/**/*", "packages/nuxt/src/**/*.ts"],
   "exclude": [
     "packages/nuxt/playground",
     "packages/nuxt/dist",
     "packages/nuxt/src/runtime/utils/icon-registry.ts",
+    "./packages/nuxt/src**/*{spec,test}.ts",
     "packages/nuxt/test",
     "**/*.spec.ts",
     "**/*.test.ts",

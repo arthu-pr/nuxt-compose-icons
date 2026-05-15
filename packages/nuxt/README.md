@@ -3,10 +3,9 @@
 [![npm version](https://img.shields.io/npm/v/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D)](https://npmjs.com/package/nuxt-compose-icons)
 [![npm downloads](https://img.shields.io/npm/dm/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D)](https://npmjs.com/package/nuxt-compose-icons)
 [![CI](https://github.com/arthur-plazanet/nuxt-compose-icons/actions/workflows/ci.yml/badge.svg)](https://github.com/arthur-plazanet/nuxt-compose-icons/actions)
-[![bundle size](https://img.shields.io/arthur-plazanet/minzip/nuxt-compose-icons)](https://bundlephobia.com/package/nuxt-compose-icons)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/nuxt-compose-icons)](https://bundlephobia.com/package/nuxt-compose-icons)
 [![license](https://img.shields.io/github/license/arthur-plazanet/nuxt-compose-icons)](LICENSE)
 ![Nuxt](https://img.shields.io/badge/Nuxt-3-and-4-00DC82?logo=nuxt.js)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/nuxt-compose-icons)](https://bundlephobia.com/package/nuxt-compose-icons)
 ![types](https://img.shields.io/npm/types/nuxt-compose-icons)
 ![last commit](https://img.shields.io/github/last-commit/arthur-plazanet/nuxt-compose-icons)
 
@@ -127,29 +126,29 @@ See full [list of features](https://nuxt-icons.use-compose.com/guide/features)
 
 ## Comparison with Other Icon Strategies
 
-| Feature                | Third-party Libraries        | Manual Vue Components | SVG Loaders (`vite-svg-loader`) | **Nuxt Compose Icons**      |
-| ---------------------- | ---------------------------- | --------------------- | ------------------------------- | --------------------------- |
-| **Setup**              | ✅ Easy                      | ⚠️ Manual             | ⚠️ Requires config              | ✅ Minimal                  |
-| **Source of truth**    | External package             | Vue files             | SVG files                       | SVG files                   |
-| **SVG output**         | Clean (often wrapped)        | Custom                | Inline                          | Clean, no wrappers          |
-| **SVG control**        | Often abstracted             | ✅ Full               | ✅ Full                         | ✅ Full                     |
-| **Theming**            | ⚠️ Prop-based, limited       | ✅ Manual CSS         | ✅ CSS-based                    | ✅ CSS variables + props    |
-| **Naming consistency** | Library-defined              | Developer-defined     | File-based                      | Deterministic, file-based   |
-| **Typing**             | ✅ Provided                  | ✅ Manual             | Depends on setup                | ✅ Generated & inferred     |
-| **Scaling**            | Dependent on library updates | Maintenance-heavy     | Flexible but unstructured       | Structured, build-generated |
-| **Nuxt integration**   | ✅ Works                     | ✅ Auto-importable    | ⚠️ Requires configuration       | ✅ Native auto-import       |
+| Feature                | Third-party Libraries      | Manual Vue Components | SVG Loaders (`vite-svg-loader`) | **Nuxt Compose Icons**         |
+| ---------------------- | -------------------------- | --------------------- | ------------------------------- | ------------------------------ |
+| **Setup**              | ✅ Easy                    | ⚠️ Manual             | ⚠️ Requires config              | ✅ One line                    |
+| **SVG output**         | ⚠️ Often wrapped           | ✅ Clean              | ✅ Inline                       | ✅ Clean, no wrappers          |
+| **SVG control**        | ⚠️ Often abstracted        | ✅ Full               | ✅ Full                         | ✅ Full                        |
+| **Theming**            | ⚠️ Prop-based, limited     | ⚠️ Manual CSS         | ✅ CSS-based                    | ✅ CSS variables + props       |
+| **Typing**             | ✅ Provided                | ⚠️ Manual             | ⚠️ Depends on setup             | ✅ Generated & inferred        |
+| **Nuxt integration**   | ✅ Works                   | ✅ Auto-importable    | ⚠️ Requires configuration       | ✅ Native auto-import          |
+| **Scaling / monorepo** | ⚠️ Tied to library updates | ❌ Maintenance-heavy  | ⚠️ Unstructured                 | ✅ Commit & ship to UI library |
+| **Source of truth**    | ❌ External package        | ✅ Vue files          | ✅ SVG files                    | ✅ SVG files                   |
+| **Naming consistency** | ⚠️ Library-defined         | ⚠️ Developer-defined  | ⚠️ File-based, no enforcement   | ✅ Deterministic, file-based   |
 
 ### Real-world Scenarios
 
-| Scenario                                   | Third-party Library            | Manual Components       | SVG Loader                 | **Nuxt Compose Icons**               |
-| ------------------------------------------ | ------------------------------ | ----------------------- | -------------------------- | ------------------------------------ |
-| **Change one color in one icon**           | Often limited to exposed props | Edit component manually | Modify SVG or override CSS | Override via CSS variable            |
-| **Apply global theme color**               | Depends on library API         | Requires conventions    | CSS-based                  | Native via CSS variables             |
-| **Preserve original SVG markup**           | Usually wrapped/modified       | Yes                     | Yes                        | Yes                                  |
-| **Add a new icon**                         | Install / import               | Create component        | Add file                   | Add file                             |
-| **Rename an icon**                         | Library-dependent              | Rename file + component | Rename file                | Rename file (component auto-updates) |
-| **Maintain consistency across 100+ icons** | Depends on library             | Manual discipline       | Flexible but unstructured  | Deterministic, build-generated       |
-| **Type inference in templates**            | Yes                            | Yes                     | Sometimes                  | Yes (generated)                      |
+| Scenario                                   | Third-party Library         | Manual Components          | SVG Loader                   | **Nuxt Compose Icons**                  |
+| ------------------------------------------ | --------------------------- | -------------------------- | ---------------------------- | --------------------------------------- |
+| **Add a new icon**                         | ⚠️ Install / import         | ⚠️ Create component        | ✅ Add file                  | ✅ Add file                             |
+| **Change one color in one icon**           | ⚠️ Limited to exposed props | ⚠️ Edit component manually | ✅ Override CSS              | ✅ Override via CSS variable            |
+| **Apply global theme color**               | ⚠️ Depends on library API   | ⚠️ Requires conventions    | ✅ CSS-based                 | ✅ Native via CSS variables             |
+| **Preserve original SVG markup**           | ⚠️ Usually wrapped/modified | ✅ Yes                     | ✅ Yes                       | ✅ Yes                                  |
+| **Rename an icon**                         | ⚠️ Library-dependent        | ⚠️ Rename file + component | ✅ Rename file               | ✅ Rename file (component auto-updates) |
+| **Maintain consistency across 100+ icons** | ⚠️ Depends on library       | ❌ Manual discipline       | ⚠️ Flexible but unstructured | ✅ Deterministic, build-generated       |
+| **Type inference in templates**            | ✅ Yes                      | ✅ Yes                     | ⚠️ Sometimes                 | ✅ Yes (generated)                      |
 
 Using pnpm:
 
@@ -169,29 +168,29 @@ Using yarn
 yarn add nuxt-compose-icons
 ```
 
-## 🛠 Usage
+## 🛠 Quick start
 
-Add the module to your `nuxt.config.ts`:
+**1. Add to `nuxt.config.ts`:**
 
 ```ts
 export default defineNuxtConfig({
   modules: ['nuxt-compose-icons'],
+  composeIcons: {
+    pathToIcons: './assets/icons',
+  },
 });
 ```
 
-Place your SVGs inside:
+**2. Drop your SVGs in `./assets/icons`**
 
-```
-/assets/icons
-```
+**3. Use them anywhere — no imports needed:**
 
-Then use them anywhere:
-
-```
-<IconUserBadge/>
+```vue
+<ArrowUpIcon size="md" color="var(--primary)" />
+<UserBadgeIcon size="lg" fill="currentColor" />
 ```
 
-No imports needed.
+That's it. Every `.svg` becomes a typed, auto-imported Vue component.
 
 ---
 
@@ -222,8 +221,6 @@ Full documentation and advanced configuration:
 
 👉 [https://nuxt-icons.use-compose.com](https://nuxt-icons.use-compose.com/)
 
-<style>
-  .markdown-body img[align=left] {
-    padding-right: 0px;
-  }
-</style>
+## 🗺 Roadmap
+
+👉 [GitHub Projects](https://github.com/users/arthu-pr/projects/7/views/1)

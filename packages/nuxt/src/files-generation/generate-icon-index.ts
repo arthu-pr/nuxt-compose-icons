@@ -5,7 +5,7 @@ import { generateComment, generateESMExport, generateESMImport, generateHeader }
 export { generateIconsIndex, generateIconsRegistry };
 
 /**
- * Sort c
+ * Sort components alphabetically by their pascalName or kebabName, falling back to file name if neither is available.
  *
  * @param {Component[]} components
  * @returns {Component[]}
@@ -16,6 +16,13 @@ function sortComponents(components: Component[]): Component[] {
   );
 }
 
+/**
+ * Generate the icons index file content.
+ * Can be used in a case of a monorepo with multiple packages and you need to import icons manually.
+ *
+ * @param {Component[]} components
+ * @returns {string}
+ */
 function generateIconsIndex(components: Component[]) {
   const sortedComponents = sortComponents(components);
 
@@ -43,6 +50,13 @@ ${exports}
   );
 }
 
+/**
+ * Generate the icons registry file content, which includes imports and an array of icon metadata and components.
+ *
+ * @param {Component[]} components
+ * @param {string} registryDir
+ * @returns {Promise<string>}
+ */
 async function generateIconsRegistry(components: Component[], registryDir: string) {
   const sortedComponents = sortComponents(components);
 
