@@ -6,9 +6,11 @@
 function useComposeIconRegistry(): object;
 ```
 
+Defined in: [runtime/composables/use-compose-icons-registry.ts:7](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/runtime/composables/use-compose-icons-registry.ts#L7)
+
 ## Returns
 
-### filteredIcons()
+### filteredIcons
 
 ```ts
 filteredIcons: (query) => ComputedRef<IconRegistryEntry[]>;
@@ -22,9 +24,9 @@ filteredIcons: (query) => ComputedRef<IconRegistryEntry[]>;
 
 #### Returns
 
-`ComputedRef`\<[`IconRegistryEntry`](../../../augments.app/#compose-icons/registry/interfaces/IconRegistryEntry.md)[]\>
+`ComputedRef`\<`IconRegistryEntry`[]\>
 
-### getIconsByName()
+### getIconsByName
 
 ```ts
 getIconsByName: (name) => IconRegistryEntry[];
@@ -40,7 +42,7 @@ Get an Icon Component by its name
 
 #### Returns
 
-[`IconRegistryEntry`](../../../augments.app/#compose-icons/registry/interfaces/IconRegistryEntry.md)[]
+`IconRegistryEntry`[]
 
 ### icons
 
@@ -48,7 +50,7 @@ Get an Icon Component by its name
 icons: IconRegistryEntry[];
 ```
 
-### searchIcons()
+### searchIcons
 
 ```ts
 searchIcons: (query) => IconRegistryEntry[];
@@ -62,4 +64,4 @@ searchIcons: (query) => IconRegistryEntry[];
 
 #### Returns
 
-[`IconRegistryEntry`](../../../augments.app/#compose-icons/registry/interfaces/IconRegistryEntry.md)[]
+`IconRegistryEntry`[]

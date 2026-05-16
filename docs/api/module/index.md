@@ -4,9 +4,13 @@
 
 ## Interfaces
 
-- [GeneratedComponentOptions](interfaces/GeneratedComponentOptions.md)
-- [NuxtComposeIconsOptions](interfaces/NuxtComposeIconsOptions.md)
+| Interface                                                        | Description |
+| ---------------------------------------------------------------- | ----------- |
+| [ComponentOptions](interfaces/ComponentOptions.md)               | -           |
+| [NuxtComposeIconsOptions](interfaces/NuxtComposeIconsOptions.md) | -           |
 
 ## Variables
 
-- [default](variables/default.md)
+| Variable                        | Description |
+| ------------------------------- | ----------- |
+| [default](variables/default.md) | -           |

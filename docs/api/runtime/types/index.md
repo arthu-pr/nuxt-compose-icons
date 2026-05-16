@@ -2,20 +2,14 @@
 
 # runtime/types
 
-## References
+## Interfaces
 
-### ComposeIconProps
+| Interface                                          | Description |
+| -------------------------------------------------- | ----------- |
+| [ComposeIconProps](interfaces/ComposeIconProps.md) | -           |
 
-Re-exports [ComposeIconProps](compose-icons-props/interfaces/ComposeIconProps.md)
+## Type Aliases
 
----
-
-### ComposeIconSize
-
-Re-exports [ComposeIconSize](icon-sizes/type-aliases/ComposeIconSize.md)
-
----
-
-### IconSizeKeyValue
-
-Re-exports [IconSizeKeyValue](icon-sizes/type-aliases/IconSizeKeyValue.md)
+| Type Alias                                         | Description |
+| -------------------------------------------------- | ----------- |
+| [ComposeIconSize](type-aliases/ComposeIconSize.md) | -           |

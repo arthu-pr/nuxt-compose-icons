@@ -2,25 +2,44 @@
 
 # Interface: NuxtComposeIconsOptions
 
+Defined in: [module.ts:91](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L91)
+
 ## Properties
+
+### cacheDir?
+
+```ts
+optional cacheDir?: string;
+```
+
+Defined in: [module.ts:180](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L180)
+
+Directory used to persist the SVG processing cache across builds.
+Defaults to `{rootDir}/.cache/nuxt-compose-icons`. Safe to gitignore.
+
+---
+
+### component?
+
+```ts
+optional component?: IconComponentOptions;
+```
+
+Defined in: [module.ts:108](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L108)
+
+Component generation options: naming, output directory, file format.
+
+---
 
 ### debug?
 
 ```ts
-optional debug: boolean;
+optional debug?: boolean;
 ```
 
-Show additional logs than warnings and errors
+Defined in: [module.ts:172](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L172)
 
----
-
-### dryRun?
-
-```ts
-optional dryRun: boolean;
-```
-
-Dry run mode: log the component names and paths without writing files
+Show additional debug logs during setup.
 
 #### Default
 
@@ -30,10 +49,20 @@ false;
 
 ---
 
-### generatedComponentOptions
+### dryRun?
 
 ```ts
-generatedComponentOptions: GeneratedComponentOptions;
+optional dryRun?: boolean;
+```
+
+Defined in: [module.ts:156](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L156)
+
+Log component names without writing files. Useful to preview what will be generated.
+
+#### Default
+
+```ts
+false;
 ```
 
 ---
@@ -41,16 +70,13 @@ generatedComponentOptions: GeneratedComponentOptions;
 ### iconComponentList?
 
 ```ts
-optional iconComponentList: object;
+optional iconComponentList?: object;
 ```
 
-TODO: An object containing icon components to register
-e.g. { 'custom-icon': CustomIconComponent }
-This allows to register custom icon components directly without generating them from SVG files
-Useful for registering third-party icon libraries or custom components
-Note: The keys will be used as the component names (with prefix/suffix and case applied)
-e.g. { 'custom-icon': CustomIconComponent } will be registered as "CustomIcon" or "custom-icon-icon" depending on the case option
-default: {}
+Defined in: [module.ts:188](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L188)
+
+Register existing Vue components as icons directly.
+Planned feature — not yet implemented.
 
 #### Index Signature
 
@@ -63,34 +89,85 @@ default: {}
 ### iconSizes?
 
 ```ts
-optional iconSizes: unknown;
+optional iconSizes?: ComposeIconSize;
 ```
 
-The icon sizes to generate CSS classes for
-default:
-{
+Defined in: [module.ts:122](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L122)
+
+Icon sizes used to generate `--size-*` CSS variables and size classes.
+
+defaults :{
 xs: '0.5rem',
 sm: '0.875rem',
 md: '1rem',
 lg: '1.5rem',
-xl: '2.5rem',
+xl: '2.5rem'
 }
+
+---
+
+### includeComposables?
+
+```ts
+optional includeComposables?: boolean;
+```
+
+Defined in: [module.ts:144](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L144)
+
+Auto-import `useComposeIcon` and `useComposeIconRegistry` composables.
+Disable if you only use the generated components and don't need dynamic lookup.
+
+#### Default
+
+```ts
+true;
+```
+
+---
+
+### includeOverview?
+
+```ts
+optional includeOverview?: boolean;
+```
+
+Defined in: [module.ts:135](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L135)
+
+Register the built-in `<ComposeIconOverview />` component.
+Useful during development to browse all available icons.
+
+#### Default
+
+```ts
+false;
+```
 
 ---
 
 ### pathToIcons?
 
 ```ts
-optional pathToIcons: string;
+optional pathToIcons?: string;
 ```
+
+Defined in: [module.ts:101](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L101)
+
+The path to the .svg icons directory
 
 ---
 
 ### reRunOnBuild?
 
 ```ts
-optional reRunOnBuild: boolean;
+optional reRunOnBuild?: boolean;
 ```
 
-Wether or not to run the module at every appplication build
-default: true
+Defined in: [module.ts:164](https://github.com/use-compose/nuxt-compose-icons/blob/42c8ba8932cbfc6640bb3c07349983c1ff13085f/packages/nuxt/src/module.ts#L164)
+
+Whether to re-run icon generation on every build.
+
+#### Default
+
+```ts
+true;
+```

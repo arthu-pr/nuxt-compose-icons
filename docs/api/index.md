@@ -3,13 +3,9 @@
 [![npm version](https://img.shields.io/npm/v/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D)](https://npmjs.com/package/nuxt-compose-icons)
 [![npm downloads](https://img.shields.io/npm/dm/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D)](https://npmjs.com/package/nuxt-compose-icons)
 [![CI](https://github.com/arthur-plazanet/nuxt-compose-icons/actions/workflows/ci.yml/badge.svg)](https://github.com/arthur-plazanet/nuxt-compose-icons/actions)
-[![bundle size](https://img.shields.io/arthur-plazanet/minzip/nuxt-compose-icons)](https://bundlephobia.com/package/nuxt-compose-icons)
-
-<!-- TODO: License https://github.com/arthur-plazanet/nuxt-compose-icons/issues/331 -->
-<!-- [![license](https://img.shields.io/github/license/arthur-plazanet/nuxt-compose-icons)](LICENSE) -->
-
-![Nuxt](https://img.shields.io/badge/Nuxt-3-and-4-00DC82?logo=nuxt.js)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/nuxt-compose-icons)](https://bundlephobia.com/package/nuxt-compose-icons)
+[![license](https://img.shields.io/github/license/arthur-plazanet/nuxt-compose-icons)](LICENSE)
+![Nuxt](https://img.shields.io/badge/Nuxt-3-and-4-00DC82?logo=nuxt.js)
 ![types](https://img.shields.io/npm/types/nuxt-compose-icons)
 ![last commit](https://img.shields.io/github/last-commit/arthur-plazanet/nuxt-compose-icons)
 
@@ -172,29 +168,29 @@ Using yarn
 yarn add nuxt-compose-icons
 ```
 
-## 🛠 Usage
+## 🛠 Quick start
 
-Add the module to your `nuxt.config.ts`:
+**1. Add to `nuxt.config.ts`:**
 
 ```ts
 export default defineNuxtConfig({
   modules: ['nuxt-compose-icons'],
+  composeIcons: {
+    pathToIcons: './assets/icons',
+  },
 });
 ```
 
-Place your SVGs inside:
+**2. Drop your SVGs in `./assets/icons`**
 
-```
-/assets/icons
-```
+**3. Use them anywhere — no imports needed:**
 
-Then use them anywhere:
-
-```
-<IconUserBadge/>
+```vue
+<ArrowUpIcon size="md" color="var(--primary)" />
+<UserBadgeIcon size="lg" fill="currentColor" />
 ```
 
-No imports needed.
+That's it. Every `.svg` becomes a typed, auto-imported Vue component.
 
 ---
 
@@ -224,9 +220,3 @@ Instead, it embraces them:
 Full documentation and advanced configuration:
 
 👉 [https://nuxt-icons.use-compose.com](https://nuxt-icons.use-compose.com/)
-
-<style>
-  .markdown-body img[align=left] {
-    padding-right: 0px;
-  }
-</style>

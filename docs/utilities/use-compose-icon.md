@@ -5,9 +5,17 @@ order: 0
 
 # useComposeIcon
 
-A helper composable for accessing icons thmeing logic in your app, using CSS Custom Properties. (`--icon-fill`, `--icon-stroke`, `--icon-stroke-width`) and returning reactive bindings ready to be used in your components.
+A helper composable for accessing icon theming logic in your app, using CSS Custom Properties (`--icon-fill`, `--icon-stroke`, `--icon-stroke-width`) and returning reactive bindings ready to be used in your components.
 
-This utility can be useful when you want to apply icon-related styles manually, and is used by all icon components by default.
+This utility can be useful when you want to apply icon-related styles manually, and is used internally by all generated icon components.
+
+Auto-imported by default (`includeComposables: true`). Can be disabled via:
+
+```ts
+composeIcons: {
+  includeComposables: false,
+}
+```
 
 - Customizable **color**, **stroke**, and **fill** values.
 - Consistent **size scaling** via a design system.
