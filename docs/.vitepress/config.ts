@@ -96,7 +96,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://github.com/arthur-plazanet/nuxt-compose-icons',
+        link: 'https://github.com/arthu-pr/nuxt-compose-icons',
       },
     ],
     outline: [2, 3],

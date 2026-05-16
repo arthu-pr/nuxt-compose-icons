@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@nuxt/kit": "4.2.2",
-    "@use-compose/logger": "0.0.6",
     "lightningcss": "1.32.0",
     "node-html-parser": "7.1.0",
     "svg-parser": "2.0.4",
@@ -71,7 +70,26 @@
   "files": [
     "dist/**"
   ],
+  "description": "Nuxt module that generates fully customizable Vue components from raw SVG files at build time, with theming via CSS variables",
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "icons",
+    "svg",
+    "vue",
+    "design-system",
+    "compose"
+  ],
+  "author": "Arthur Plazanet <plazanet.art@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arthu-pr/nuxt-compose-icons/issues"
+  },
+  "homepage": "https://nuxt-icons.use-compose.com",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "sideEffects": false,
   "main": "./dist/module.mjs",
   "module": "./dist/module.mjs",
   "packageManager": "pnpm@10.33.0",

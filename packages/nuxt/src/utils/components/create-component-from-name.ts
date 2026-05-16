@@ -22,17 +22,17 @@ const defaultComponent: Component = {
 /**
  * Creates a Nuxt component object from the provided options, applying paths and naming conventions.
  *
- * @param {AddComponentOptions} componentOptions
+ * @param {AddComponentOptions} iconComponentOptions
  * @returns {Component} component
  */
-function createComponentFromName(componentOptions: AddComponentOptions): Component {
-  const { name } = componentOptions;
+function createComponentFromName(iconComponentOptions: AddComponentOptions): Component {
+  const { name } = iconComponentOptions;
   const pascalName = toPascalCase(name);
   const kebabName = toKebabCase(name);
 
   const component: Component = {
     ...defaultComponent,
-    ...componentOptions,
+    ...iconComponentOptions,
     pascalName: pascalName,
     kebabName: kebabName,
     shortPath: `components/${pascalName}`,

@@ -25,10 +25,12 @@ import {
 } from './utils';
 import { createDir, writeFile } from './utils/filesystem/helpers';
 import { optimizeCss } from './utils/styles/optimize-css';
+import { SvgProcessingCache } from './utils/svg-processing-cache';
 
-export interface GeneratedComponentOptions {
+export interface IconComponentOptions {
   /**
-   * The prefix to use for the component
+   * Prefix prepended to the generated component name.
+   * e.g. `'My'` → `<MyArrowUpIcon />`
    *
    * @type {?string}
    * @default undefined
@@ -36,103 +38,117 @@ export interface GeneratedComponentOptions {
   prefix?: string;
 
   /**
-   * The suffix to use for the component
+   * Suffix appended to the generated component name.
+   * e.g. `'Icon'` → `<ArrowUpIcon />`
    *
    * @type {?string}
-   * @default "Icon" ( PascalCase ) and "-icon" ( kebab-case )
+   * @default 'Icon'
    */
   suffix?: string;
 
   /**
-   * Case to use for the component name
+   * Naming convention for the generated component.
    *
    * @type {'pascal' | 'kebab'}
-   * @default "pascal" ( PascalCase ) and "kebab" ( kebab-case )
+   * @default 'pascal'
    */
-  case: 'pascal' | 'kebab';
+  case?: 'pascal' | 'kebab';
 
   /**
-   * Wether to create an index file or not in the components directory
+   * Directory where generated components are written.
+   * Defaults to `.nuxt/compose-icons`.
    *
-   * @type {boolean}
+   * @type {?string}
+   */
+  destDir?: string;
+
+  /**
+   * Format of the generated component file, either as a Vue SFC (.vue) or as a TypeScript file (.ts)
+   *
+   *
+   * @type {?'ts' | 'vue'}
+   * @default 'ts'
+   */
+  fileFormat?: 'vue' | 'ts';
+
+  /**
+   * Write an `index.ts` barrel file in `destDir`.
+   *
+   * @type {?boolean}
    * @default false
    */
   hasIndexFile?: boolean;
 
   /**
-   * TODO: The directory to save the generated components
+   * Extra CSS classes applied to every generated icon component.
    *
-   * @type {?string}
-   * @default "runtime/components/icons-generated"
-   */
-  componentsDestDir?: string;
-
-  /**
-   * CSS Classes to apply to the generated components
-   *
-   * @type {?string[]}
+   * @type {?string | string[]}
    * @default []
    */
   iconClasses?: string | string[];
-
-  /**
-   * Format of the generated component file, either as a Vue SFC (.vue) or as a TypeScript file (.ts)
-   *
-   * @type {?('vue' | 'ts')}
-   * @default 'vue'
-   */
-  fileFormat?: 'vue' | 'ts';
 }
 
 export interface NuxtComposeIconsOptions {
-  /**
-   * Wether or not to run the module at every appplication build
-   * default: true
-   *
-   * @type {?boolean}
-   */
-  reRunOnBuild?: boolean;
+  // -------------------------------------------------------------------------
+  // Core
+  // -------------------------------------------------------------------------
 
-  /*
-   * The path to the icons directory
+  /**
+   * The path to the .svg icons directory
+   *
+   * @type {?string}
    */
   pathToIcons?: string;
 
   /**
-   * TODO: An object containing icon components to register
-   * e.g. { 'custom-icon': CustomIconComponent }
-   * This allows to register custom icon components directly without generating them from SVG files
-   * Useful for registering third-party icon libraries or custom components
-   * Note: The keys will be used as the component names (with prefix/suffix and case applied)
-   * e.g. { 'custom-icon': CustomIconComponent } will be registered as "CustomIcon" or "custom-icon-icon" depending on the case option
-   * default: {}
+   * Component generation options: naming, output directory, file format.
    *
-   * @type {?{ [key: string]: Component }}
+   * @type {?IconComponentOptions}
    */
-  iconComponentList?: { [key: string]: Component };
+  component?: IconComponentOptions;
 
   /**
-   * The icon sizes to generate CSS classes for
-   * default:
-   * {
-   *   xs: '0.5rem',
-   *   sm: '0.875rem',
-   *   md: '1rem',
-   *   lg: '1.5rem',
-   *   xl: '2.5rem',
-   * }
+   * Icon sizes used to generate `--size-*` CSS variables and size classes.
    *
-   * @type {?IconSizes}
+   * defaults :{
+   *  xs: '0.5rem',
+   *  sm: '0.875rem',
+   *  md: '1rem',
+   *  lg: '1.5rem',
+   *  xl: '2.5rem'
+   * }
+   * @type {?ComposeIconSize}
    */
   iconSizes?: ComposeIconSize;
 
-  /**
-   * @type {GeneratedComponentOptions}
-   */
-  generatedComponentOptions: GeneratedComponentOptions;
+  // -------------------------------------------------------------------------
+  // Features
+  // -------------------------------------------------------------------------
 
   /**
-   * Dry run mode: log the component names and paths without writing files
+   * Register the built-in `<ComposeIconOverview />` component.
+   * Useful during development to browse all available icons.
+   *
+   * @type {?boolean}
+   * @default false
+   */
+  includeOverview?: boolean;
+
+  /**
+   * Auto-import `useComposeIcon` and `useComposeIconRegistry` composables.
+   * Disable if you only use the generated components and don't need dynamic lookup.
+   *
+   * @type {?boolean}
+   * @default true
+   */
+  includeComposables?: boolean;
+
+  // -------------------------------------------------------------------------
+  // Advanced
+  // -------------------------------------------------------------------------
+
+  /**
+   * Log component names without writing files. Useful to preview what will be generated.
    *
    * @type {?boolean}
    * @default false
@@ -140,11 +156,51 @@ export interface NuxtComposeIconsOptions {
   dryRun?: boolean;
 
   /**
-   * Show additional logs than warnings and errors
+   * Whether to re-run icon generation on every build. (bypassing the built-in cache)
    *
    * @type {?boolean}
+   * @default false
+   */
+  reRunOnBuild?: boolean;
+
+  /**
+   * Show additional debug logs during setup.
+   *
+   * @type {?boolean}
+   * @default false
    */
   debug?: boolean;
+
+  /**
+   * Directory used to persist the SVG processing cache across builds.
+   * Defaults to `{rootDir}/.cache/nuxt-compose-icons`. Safe to gitignore.
+   *
+   * @type {?string}
+   */
+  cacheDir?: string;
+
+  /**
+   * Register existing Vue components as icons directly.
+   * Planned feature — not yet implemented.
+   *
+   * @type {?{ [key: string]: Component }}
+   */
+  iconComponentList?: { [key: string]: Component };
+}
+
+/**
+ * Normalizes iconClasses to a string array and appends the required base class.
+ */
+function normalizeIconClasses(options: NuxtComposeIconsOptions): string[] {
+  const iconClasses = options.component?.iconClasses;
+  const classes = iconClasses
+    ? Array.isArray(iconClasses)
+      ? [...iconClasses]
+      : [iconClasses]
+    : [];
+  // Ensure the base class is always included to allow styling icons with a common selector
+  classes.push('compose-icon');
+  return classes;
 }
 
 export default defineNuxtModule<NuxtComposeIconsOptions>({
@@ -152,24 +208,22 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
     name: 'nuxt-compose-icons',
     configKey: 'composeIcons',
     compatibility: {
-      // Required nuxt version in semver format.
-      nuxt: '>=3.0.0', // or use '^3.0.0'
+      nuxt: '>=3.0.0',
     },
   },
   // Default configuration options of the Nuxt module
+  // By default the "Icon" suffix is used with no prefix, e.g. "arrow-up.svg" → <ArrowUpIcon />
   defaults: {
-    reRunOnBuild: true,
-
-    // If not provided, the default will be to use the "Icon" suffix for the component without a prefix
-    // e.g. "arrow-up.svg" will be "ArrowUpIcon"
-    generatedComponentOptions: {
-      prefix: undefined,
+    component: {
       suffix: 'Icon',
       case: 'pascal',
-      componentsDestDir: undefined,
       fileFormat: 'ts',
+      hasIndexFile: false,
     },
+    reRunOnBuild: false,
     iconComponentList: {},
+    includeOverview: false,
+    includeComposables: true,
   },
 
   hooks: {
@@ -191,20 +245,8 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
       }
     },
   },
+
   async setup(options, nuxt) {
-    // const logger = useLogger('nuxt-compose-icons', {
-    //   reporters: [
-    //     {
-    //       log(log) {
-    //         if (log.type === 'error' || log.type === 'warn') {
-    //           console[log.type](`[${log.type.toUpperCase()}]`, ...log.args);
-    //         } else if (log.type === 'info' && options.debug) {
-    //           console.log(`[DEBUG]`, ...log.args);
-    //         }
-    //       },
-    //     },
-    //   ],
-    // });
     const logger = useLogger('nuxt-compose-icons');
     const { resolve } = createResolver(import.meta.url);
 
@@ -212,434 +254,289 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
      * Resolver for everything related to the user's app directory
      *
      * @param {...string[]} p
-     * @returns {*}
+     * @returns {string}
      */
     function resolveApp(...p: string[]) {
       return path.resolve(nuxt.options.rootDir, ...p);
-    } // app base
+    }
 
     /**
      * Resolver for everything related to the Nuxt build directory
      *
      * @param {...string[]} p
-     * @returns {*}
+     * @returns {string}
      */
     function resolveBuild(...p: string[]) {
       return path.resolve(nuxt.options.buildDir, ...p);
     }
 
-    /**
-     * Nuxt version detection and compatibility handling
-     * TODO: isNuxtMajorVersion and assertNuxtCompatibility were producing errors if used on certain Nuxt 3 versions
-     */
-    // const nuxtMajor = Number.parseInt(nuxt._version.split('.')[0]);
-    // // Nuxt 3 can opt into Nuxt 4 behaviour via future.compatibilityVersion
-    // const compatVersion = (
-    //   nuxt.options as unknown as Record<string, unknown> & {
-    //     future?: { compatibilityVersion?: number };
-    //   }
-    // ).future?.compatibilityVersion;
-    // const effectiveMajor = compatVersion ?? nuxtMajor;
-
-    // if (effectiveMajor >= 4) {
-    //   logger.info('✅ - Nuxt 4 detected');
-    // } else if (nuxtMajor === 3) {
-    //   logger.info('✅ - Nuxt 3 detected');
-    // } else {
-    //   logger.warn(`⚠️ - Nuxt ${nuxtMajor} detected, compatibility not guaranteed`);
-    // }
-
     // Prevent Vite's dep pre-bundling from running esbuild on the composables
     // before this module has a chance to register the #compose-icons/registry alias.
+    // nuxt.options.vite is always mutable; vite:extendConfig types optimizeDeps as readonly.
     nuxt.options.vite.optimizeDeps ??= {};
-    nuxt.options.vite.optimizeDeps.exclude = [
-      ...(nuxt.options.vite.optimizeDeps.exclude ?? []),
-      'nuxt-compose-icons',
-    ];
+    (nuxt.options.vite.optimizeDeps.exclude ??= []).push('nuxt-compose-icons');
 
-    const { reRunOnBuild, pathToIcons, iconComponentList, iconSizes, generatedComponentOptions } =
-      options;
-    // const fileFormat = generatedComponentOptions.fileFormat || 'ts';
+    const { pathToIcons, iconComponentList, iconSizes } = options;
+    const {
+      suffix,
+      prefix,
+      case: _case,
+      destDir,
+      fileFormat,
+      hasIndexFile,
+    } = options.component ?? {};
 
-    if (!reRunOnBuild) {
-      logger.info('⚠️ - reRunOnBuild is disabled, the module will run only once at setup');
-      return;
-    }
-
-    if (!pathToIcons && !iconComponentList) {
+    if (!pathToIcons && !Object.keys(iconComponentList ?? {}).length) {
       logger.error(
         'You must provide either pathToIcons or iconComponentList in the module options.',
       );
       throw new Error('pathToIcons or iconComponentList is required');
     }
 
-    // Set a directory where the icons will be generated if no componentsDestDir is provided
-    // .nuxt/compose-icons
+    // Set a directory where the icons will be generated if no component.destDir is provided (.nuxt/compose-icons)
     const defaultDir = resolveBuild('compose-icons');
-
-    if (!options.generatedComponentOptions.componentsDestDir) {
-      logger.info(
-        '⚠️ - No directory is set, using default directory → ',
-        defaultDir,
-        '\n To set a custom directory, use the generatedComponentOptions.componentsDestDir option.',
-      );
-    }
-
-    const userDir = options.generatedComponentOptions.componentsDestDir;
-
+    const userDir = destDir;
     const componentsDir = assertAbsolute(
       userDir ? (path.isAbsolute(userDir) ? userDir : resolveApp(userDir)) : defaultDir,
     );
 
+    if (!userDir) {
+      logger.info(
+        '⚠️ - No directory is set, using default directory → ',
+        defaultDir,
+        '\n To set a custom directory, use the component.destDir option.',
+      );
+    }
+
     await createDir(componentsDir);
 
-    if (pathToIcons) {
-      // Resolve the path to the icons directory provided
-      const absolutePathToIcons = assertAbsolute(
-        path.isAbsolute(pathToIcons) ? pathToIcons : resolveApp(pathToIcons),
-      );
+    // Guard: iconComponentList path is a planned feature — only pathToIcons is supported for now
+    if (!pathToIcons) return;
 
-      if (fs.existsSync(absolutePathToIcons) && fs.statSync(absolutePathToIcons).isDirectory()) {
-        // We first read all the files recursively to flatten the structure
-        const files = await readDirectoryRecursively(absolutePathToIcons);
+    // Resolve the path to the icons directory provided
+    //  it can be provided with many different formats:
+    //  - absolute path: /Users/arthur/icons
+    //  - relative path from project root: ./icons or icons
+    // We resolve it to an absolute path
+    const absolutePathToIcons = assertAbsolute(
+      path.isAbsolute(pathToIcons) ? pathToIcons : resolveApp(pathToIcons),
+    );
 
-        // List of generated Icon components
-        const generatedComponents: Component[] = [];
+    if (!fs.existsSync(absolutePathToIcons) || !fs.statSync(absolutePathToIcons).isDirectory()) {
+      logger.error(`Folder does not exist: ${absolutePathToIcons}`);
+      throw new Error(`Folder does not exist: ${absolutePathToIcons}`);
+    }
 
-        /*
-         * Dry run mode: log the component names and paths without writing files
-         */
-        if (options.dryRun) {
-          nuxt.hook('build:before', () => {
-            logger.info(`🔍 Dry-run mode: No files will be written.`);
-            files.forEach((file) => {
-              const fileInfo = path.parse(file);
-              const name = generateComponentName(fileInfo.name, options);
-              logger.info(`${fileInfo.base} Would generate: ${name}`);
-            });
-            process.exit();
-          });
-        }
+    const files = await readDirectoryRecursively(absolutePathToIcons);
 
-        let iconComponentClasses: string[] = [];
+    if (options.dryRun) {
+      logger.info(`🔍 Dry-run mode: No files will be written.`);
+      files.forEach((file) => {
+        const fileInfo = path.parse(file);
+        logger.info(
+          `${fileInfo.base} Would generate: ${generateComponentName(fileInfo.name, options.component ?? {})}`,
+        );
+      });
+      return;
+    }
 
-        if (generatedComponentOptions.iconClasses) {
-          // Set Icon classes (can be set to ensure consistency in a Design System for example)
-          iconComponentClasses = Array.isArray(generatedComponentOptions.iconClasses)
-            ? generatedComponentOptions.iconClasses
-            : [generatedComponentOptions.iconClasses];
-        }
+    const iconComponentClasses = normalizeIconClasses(options);
 
-        // We ensure the base class is always included to allow styling the icons with a common class, used by default CSS
-        // TODO: Let the user fully set the base class https://github.com/arthur-plazanet/nuxt-compose-icons/issues/312
-        iconComponentClasses.push('compose-icon'); // Ensure the base class is always included
+    const optionsHash = SvgProcessingCache.hashOptions({
+      iconClasses: iconComponentClasses,
+      fileFormat,
+      prefix,
+      suffix,
+      case: _case,
+    });
+    const cache = new SvgProcessingCache(
+      nuxt.options.rootDir,
+      nuxt.options.buildDir,
+      optionsHash,
+      options.cacheDir,
+    );
+    if (!options.reRunOnBuild) {
+      await cache.load();
+    }
 
-        /*
-         * For each file we:
-         * 1. Parse the content (as HTML/XML string)
-         * 2. Optimize with SVGO
-         * 3. Generate the component name based on the initial svg file name and the options provided (prefix, suffix, case)
-         * 4. Create the component code as literal string template by:
-         *   . Recreating the Vue VNode structure dynamically based on the SVG content
-         *   . Set the props and attributes based on the SVG content and the options passed
-         * 5. Write the component to the file system
-         * 6. Create the "official" component object with the name and path
-         * 7. Add the component to the Nuxt app's components array at build time
-         * 8. Generate a CSS file with the icon sizes and add it to the Nuxt app's CSS array at build time
-         * 9. Add composables
-         * 10. Generate the icons index file
-         * 11. Generate the icon registry file
-         *
-         * We use a literal string template to create the Vue component
-         * see https://nuxt-compose-icons.arthurplazanet.com/why-literal-strings-to-create-vue-components
-         */
-        // nuxt.hook('build:before', async () => {
-        for (const filePath of files) {
-          const fileInfo = path.parse(filePath);
+    /*
+     * For each SVG file we:
+     * 1. Generate the component name based on the initial svg file name and the options provided (prefix, suffix, case)
+     * 2. Parse the content (as HTML/XML string)
+     * 3. Optimize with SVGO (skipped for unchanged files via hash cache)
+     * 4. Create the component code as a literal string template by:
+     *   . Recreating the Vue VNode structure dynamically based on the SVG content
+     *   . Setting props and attributes based on the SVG content and the options passed
+     * 5. Write the component to the file system
+     *    (addTemplate for .nuxt/ so files survive the prepare-phase cleanup, writeFile for custom dirs)
+     * 6. Create the component object with name and resolved path
+     *
+     * Then globally:
+     * 7. Generate a CSS file with the icon sizes and add it to the Nuxt app's CSS array
+     * 8. Generate the icons index file (if component.hasIndexFile is true)
+     * 9. Register each component with Nuxt's auto-import system
+     * 10. Generate the icon registry file and expose it via the #compose-icons/registry alias
+     * 11. Add composables (useComposeIcon, useComposeIconRegistry)
+     *
+     * We use a literal string template to create the Vue component.
+     * See https://nuxt-compose-icons.arthurplazanet.com/why-literal-strings-to-create-vue-components
+     *
+     * Files are processed in parallel (Promise.all) to overlap I/O.
+     * SVGO (step 2) is skipped for any SVG whose content hash matches the persistent cache.
+     */
+    const svgFiles = files.filter((f) => path.parse(f).ext === '.svg');
 
-          if (fileInfo.ext !== '.svg') {
-            continue;
-          }
+    const generatedComponents: Component[] = await Promise.all(
+      svgFiles.map(async (filePath) => {
+        const fileInfo = path.parse(filePath);
 
-          // 1. Parse the content (as HTML string)
-          let svgContent = await fsp.readFile(filePath, 'utf-8');
+        // 1. Component name derived from filename + naming options (computed once)
+        const componentName = generateComponentName(fileInfo.name, options.component ?? {});
 
-          // 2. Optimize with SVGO
-          svgContent = optimizeSvg(svgContent, {
-            iconClasses: iconComponentClasses,
-          });
+        // 2. Parse the content (as HTML string)
+        const rawSvg = await fsp.readFile(filePath, 'utf-8');
+        const contentHash = SvgProcessingCache.hashContent(rawSvg);
 
-          // TODO: handle double dashes "--", and if ".svg" already present
-          const componentName = generateComponentName(fileInfo.name, options);
+        // 3. Optimize with SVGO — use cached result if SVG is unchanged
+        let componentCode = cache.get(filePath, contentHash);
+        if (componentCode === null) {
+          const optimized = optimizeSvg(rawSvg, { iconClasses: iconComponentClasses });
 
-          // 3. Create the component code as literal string template (.ts fine)
-          let componentCode = createSvgComponentCode(componentName, svgContent);
+          // 4. Create the component code as a literal string template (inside cache miss)
+          componentCode = createSvgComponentCode(componentName, optimized);
 
-          //4 - if fileFormat is set to "vue", wrap the component code in a Vue SFC <script lang="ts"> block
-          //  TODO: See pros and cons https://github.com/arthur-plazanet/nuxt-compose-icons/issues/325
-          if (options.generatedComponentOptions.fileFormat === 'vue') {
+          // If fileFormat is "vue", wrap the component code in a Vue SFC <script lang="ts"> block
+          if (fileFormat === 'vue') {
             componentCode = vueSFCWrapper(componentCode);
           }
 
-          // 4. Write the component to the file system.
-          // Default dir (.nuxt): use addTemplate so files survive the prepare-phase cleanup.
-          // Custom dir: writeFile is fine — Nuxt never cleans user directories.
-          let generatedFilePath: string;
-          if (componentsDir !== defaultDir) {
-            generatedFilePath = await writeComponentFile({
-              componentName,
-              componentsDir,
-              componentCode,
-              format: options.generatedComponentOptions.fileFormat,
-            });
-          } else {
-            const ext = options.generatedComponentOptions.fileFormat ?? 'ts';
-            const capturedCode = componentCode;
-            const iconTemplate = addTemplate({
-              filename: `compose-icons/${componentName}.${ext}`,
-              getContents: () => capturedCode,
-              write: true,
-            });
-            generatedFilePath = iconTemplate.dst;
-          }
-
-          // 5. Create the "official" component object with the name and path
-          const component = createComponentFromName({
-            name: componentName,
-            shortPath: generatedFilePath,
-            filePath: generatedFilePath,
-          });
-
-          // 5.5 Store the component in array for later use
-          generatedComponents.push(component);
-
-          // 6. Add the component to the Nuxt app's components array at build time
-          // nuxt.hook('components:extend', (components) => {
-          // components.push(component);
-          // });
-          // addComponent({
-          //   name: component.pascalName,
-          //   filePath: component.filePath,
-          // });
-
-          // addImportsSources({
-          //   from: resolver.resolve('runtime/types'),
-          //   imports: [
-          //     {
-          //       name: 'types',
-          //       as: 'types',
-          //     },
-          //   ],
-          // });
-          if (options.debug) {
-            logger.info('📟 - defaultDir → ', defaultDir);
-            logger.success(`✅ Generated component: ${componentName} from ${fileInfo.base}`);
-          }
+          cache.set(filePath, contentHash, componentCode);
         }
 
-        // 7. Generate a CSS file with the icon sizes and add it to the Nuxt app's CSS array at build time
-        const { cssFileContent } = generateCssFile({
-          iconSizes,
-          iconClasses: iconComponentClasses,
-        });
-
-        if (options.debug) {
-          logger.info(`📦 - Registering components from ${componentsDir}`);
-          logger.info(`📟 - Generated CSS content for icon sizes: ${cssFileContent}`);
-        }
-        // Define the path to save the CSS file within the module
-        // const iconRootVars = resolve('./runtime/assets/compose-sizes.css');
-        // await writeFile(iconRootVars, cssContent);
-        // nuxt.options.css.push(iconRootVars);
-
-        const baseIconStyles = resolve('runtime/assets/compose-icon.css');
-
-        // await writeFile(baseIconStyles, optimizeCss(cssFileContent));
-        // nuxt.options.alias = {
-        //   '@': './runtime',
-        // };
-        // 2. Register a single template that merges them
-        nuxt.options.css.push(baseIconStyles);
-
-        // nuxt.options.css.push(tpls.dst); // ✅ this is in buildDir
-        // logger.log('📟 - tpl → ', tpl);
-
-        const completeIconStyles = optimizeCss(`${cssFileContent}`);
-        const cssFileName = 'compose-icon-sizes.css';
-
-        const tpl = addTemplate({
-          filename: cssFileName,
-          getContents: () => `${completeIconStyles}`,
-        });
-        nuxt.options.css.push(tpl.dst);
-
-        //  write file in the component dir
-        await writeFile(assertAbsolute(resolve(componentsDir, cssFileName)), completeIconStyles);
-
-        // addImportsDir(resolve('runtime/types'));
-        // addImportsDir(resolve('runtime/utils'));
-
-        // Add built-in components
-        // TODO: Make optional?
-        addComponent({
-          name: 'ComposeIconOverview',
-          filePath: resolve('runtime/components/ComposeIconOverview.vue'),
-        });
-
-        // 9. Generate the icons index file
-        const iconsIndexContent = generateIconsIndex(generatedComponents);
-        await writeFile(assertAbsolute(resolve(componentsDir, 'index.ts')), iconsIndexContent);
-
-        /**
-         * TODO: description
-         */
-        // addTypeTemplate({
-        //   filename: 'types/my-module.d.ts',
-        //   getContents: () => `// Generated by my-module
-        // declare module 'nuxt-compose-icons' {
-        //   export { useComposeIcon, useComposeIconRegistry } from 'nuxt-compose-icons/dist/runtime/composables';
-        // }
-        // declare module 'nuxt-compose-icons/composables' {
-        //   export { useComposeIcon, useComposeIconRegistry } from 'nuxt-compose-icons/dist/runtime/composables';
-        // }
-        // declare module 'nuxt-compose-icons/utils' {
-        //   export { generateColorVariable, getIconSizeClass } from 'nuxt-compose-icons';
-        //   export { useComposeIcon, useComposeIconRegistry } from 'nuxt-compose-icons/dist/runtime/composables/compose-icon';
-        // }
-        // declare module 'nuxt-compose-icons/types' {
-        //   export { IconSize } from 'nuxt-compose-icons';
-        //   export type {
-        //     ComposeIconProps,
-        //     ComposeIconSize,
-        //     IconSizeKey,
-        //     IconSizeKeyValue,
-        //   } from 'nuxt-compose-icons';
-        // }
-        // declare module 'nuxt-compose-icons/components' {
-        //   export * from ${JSON.stringify(componentsDir)}
-        // }`,
-        // });
-
-        // addImports({
-        //   name: 'useComposeIcon', // name of the composable to be used
-        //   as: 'useComposeIcon',
-        //   from: resolve('runtime/composables/compose-icon'), // path of composable
-        // });
-        // nuxt.hook('components:dirs', (dirs) => {
-        //   dirs.push({
-        //     path: path.resolve(__dirname, './runtime/components/icon-generated'),
-        //     prefix: 'Compose',
-        //   });
-        // });
-        for (const c of generatedComponents) {
-          addComponent({
-            name: c.pascalName,
-            filePath: c.filePath,
-          });
-        }
-
-        logger.info(
-          `📦 ${generatedComponents.length} components generated and registered from ${componentsDir}`,
-        );
-
-        // 10. Generate the icon registry file
-        let registryPath: string;
-
+        // 5. Write the component to the file system.
+        // Default dir (.nuxt): use addTemplate so files survive the prepare-phase cleanup.
+        // Custom dir: writeFile is fine — Nuxt never cleans user directories.
+        let generatedFilePath: string;
         if (componentsDir !== defaultDir) {
-          // Custom componentsDestDir: write registry there (alias points directly to it).
-          // No need for a .nuxt copy — paths are already correct relative to componentsDir.
-          const iconsRegistryContent = await generateIconsRegistry(
-            generatedComponents,
+          generatedFilePath = await writeComponentFile({
+            componentName,
             componentsDir,
-          );
-          registryPath = path.join(componentsDir, 'icon-registry.ts');
-          await writeFile(assertAbsolute(registryPath), iconsRegistryContent);
+            componentCode,
+            format: fileFormat,
+          });
         } else {
-          // Default (.nuxt/compose-icons): use addTemplate so Nuxt manages the file lifecycle.
-          const templateRegistryContent = await generateIconsRegistry(
-            generatedComponents,
-            defaultDir,
-          );
-          const registryTemplate = addTemplate({
-            filename: 'compose-icons/icon-registry.ts',
-            getContents: () => templateRegistryContent,
+          const ext = fileFormat ?? 'ts';
+          const capturedCode = componentCode;
+          const iconTemplate = addTemplate({
+            filename: `compose-icons/${componentName}.${ext}`,
+            getContents: () => capturedCode,
             write: true,
           });
-          registryPath = registryTemplate.dst;
+          generatedFilePath = iconTemplate.dst;
         }
 
-        // Make #compose-icons/registry resolvable in Vite's transform phase (client + SSR)
-        nuxt.options.alias['#compose-icons/registry'] = registryPath;
+        if (options.debug) {
+          logger.success(`✅ Generated component: ${componentName} from ${fileInfo.base}`);
+        }
 
-        // For Nitro: provide a virtual module with metadata only (no component file imports).
-        // Icon component files written via writeFile during setup() may not be present when
-        // Nitro runs (cleaned by Nuxt's prepare phase). Nitro doesn't render Vue components
-        // in SPA mode, so a metadata-only registry is sufficient.
-        // const virtualRegistryContent = [
-        //   `export const iconRegistry = [`,
-        //   ...generatedComponents.map((c) => {
-        //     const base = path.basename(c.filePath).replace(/\.(ts|js|vue)$/, '');
-        //     const pascal = c.pascalName || base;
-        //     const kebab = c.kebabName || base;
-        //     return `  { name: '${pascal}', pascalName: '${pascal}', kebabName: '${kebab}', importPath: './${base}', component: null },`;
-        //   }),
-        //   `];`,
-        // ].join('\n');
+        // 6. Create the component object with name and resolved path
+        return createComponentFromName({
+          name: componentName,
+          shortPath: generatedFilePath,
+          filePath: generatedFilePath,
+        });
+      }),
+    );
 
-        // nuxt.hook('nitro:config', (nitroConfig) => {
-        //   // Virtual module takes precedence over any propagated alias
-        //   nitroConfig.virtual ??= {};
-        //   nitroConfig.virtual['#compose-icons/registry'] = virtualRegistryContent;
+    if (!options.reRunOnBuild) {
+      await cache.save();
+    }
 
-        //   // Bundle nuxt-compose-icons so internal imports resolve at build time
-        //   const inline = nitroConfig.externals?.inline;
-        //   nitroConfig.externals ??= {};
-        //   nitroConfig.externals.inline = [
-        //     ...(Array.isArray(inline) ? inline : inline ? [inline] : []),
-        //     'nuxt-compose-icons',
-        //   ];
-        // });
+    // 7. Generate a CSS file with the icon sizes and add it to the Nuxt app's CSS array
+    const baseIconStylesPath = resolve('runtime/assets/compose-icon.css');
+    nuxt.options.css.push(baseIconStylesPath);
 
-        // 8. Add composables
-        addImports([
-          { name: 'useComposeIcon', from: resolve('runtime/composables/use-compose-icon') },
-          {
-            name: 'useComposeIconRegistry',
-            from: resolve('runtime/composables/use-compose-icons-registry'),
-          },
-        ]);
-        //     nuxt.hook('components:extend', async (components) => {
-        //   for (const c of generatedComponents) {
-        //     components.push({
-        //       ...c,
-        //     });
-        //   }
-        // });
-      } else {
-        logger.error(`Folder does not exist: ${absolutePathToIcons}`);
-        throw new Error(`Folder does not exist: ${absolutePathToIcons}`);
-      }
-    } else if (iconComponentList) {
-      // TODO: Think about re-implementing it or not
-      Object.keys(iconComponentList).forEach((iconComponentName) => {
-        logger.info('📟 - iconComponentName → ', iconComponentName);
-        // const test = resolveComponent(iconComponentList[iconComponentName]);
-        // TODO: Check if necessary to handle snake case as well
-        // const componentName = toPascalCase(iconComponentName).replace(/&/g, 'And');
-        // // const svgContent = ''; // Placeholder: you need to load the actual SVG content as needed
-        // // const componentCode = createSvgComponentCode(componentName, svgContent);
-        // // const componentCode = iconComponentList[iconComponentName];
-        // const generatedFilePath = path.resolve(__dirname, './playground/icon-list.ts');
-        // const component = createComponentFromName({
-        //   ...options.generatedComponentOptions,
-        //   name: componentName,
-        //   shortPath: generatedFilePath,
-        //   filePath: generatedFilePath,
-        // });
-        // nuxt.hook('components:extend', (components) => {
-        //   components.push(component);
-        // });
+    const cssFileContent = generateCssFile({ iconSizes, iconClasses: iconComponentClasses });
+    const completeIconStyles = optimizeCss(cssFileContent);
+    const cssFileName = 'compose-icon-sizes.css';
+    const tpl = addTemplate({
+      filename: cssFileName,
+      getContents: () => completeIconStyles,
+    });
+    nuxt.options.css.push(tpl.dst);
+
+    // Custom destDir only: concatenate base + generated CSS into one file so it travels with components
+    if (componentsDir !== defaultDir) {
+      const baseIconStylesContent = await fsp.readFile(baseIconStylesPath, 'utf-8');
+      const combinedCssFileName = 'compose-icons.css';
+      const combinedStyles = optimizeCss(`${baseIconStylesContent}\n${cssFileContent}`);
+      await writeFile(
+        assertAbsolute(path.join(componentsDir, combinedCssFileName)),
+        combinedStyles,
+      );
+    }
+
+    if (options.debug) {
+      logger.info(`📦 - Registering components from ${componentsDir}`);
+    }
+
+    // 8. Generate the icons index file (opt-in via component.hasIndexFile)
+    if (hasIndexFile) {
+      await writeFile(
+        assertAbsolute(resolve(componentsDir, 'index.ts')),
+        generateIconsIndex(generatedComponents),
+      );
+    }
+
+    // 9. Register each generated component with Nuxt's auto-import system
+    for (const c of generatedComponents) {
+      addComponent({ name: c.pascalName, filePath: c.filePath });
+    }
+
+    logger.info(
+      `📦 ${generatedComponents.length} components generated and registered from ${componentsDir}`,
+    );
+
+    // 10. Generate the icon registry file and expose it via the #compose-icons/registry alias
+    let registryPath: string;
+
+    if (componentsDir !== defaultDir) {
+      // Custom component.destDir: write registry there (alias points directly to it).
+      // No need for a .nuxt copy — paths are already correct relative to componentsDir.
+      const iconsRegistryContent = await generateIconsRegistry(generatedComponents, componentsDir);
+      registryPath = path.join(componentsDir, 'icon-registry.ts');
+      await writeFile(assertAbsolute(registryPath), iconsRegistryContent);
+    } else {
+      // Default (.nuxt/compose-icons): use addTemplate so Nuxt manages the file lifecycle.
+      const templateRegistryContent = await generateIconsRegistry(generatedComponents, defaultDir);
+      const registryTemplate = addTemplate({
+        filename: 'compose-icons/icon-registry.ts',
+        getContents: () => templateRegistryContent,
+        write: true,
       });
+      registryPath = registryTemplate.dst;
+    }
+
+    // Make #compose-icons/registry resolvable in Vite's transform phase (client + SSR).
+    // Nitro gets the same alias — icon component files are written via addTemplate so they
+    // survive the prepare-phase cleanup and are present when Nitro bundles the server.
+    nuxt.options.alias['#compose-icons/registry'] = registryPath;
+
+    if (options.includeOverview) {
+      addComponent({
+        name: 'ComposeIconOverview',
+        filePath: resolve('runtime/components/ComposeIconOverview.vue'),
+      });
+    }
+    // 11. Add composables
+    if (options.includeComposables) {
+      addImports([
+        { name: 'useComposeIcon', from: resolve('runtime/composables/use-compose-icon') },
+        {
+          name: 'useComposeIconRegistry',
+          from: resolve('runtime/composables/use-compose-icons-registry'),
+        },
+      ]);
     }
   },
 });
