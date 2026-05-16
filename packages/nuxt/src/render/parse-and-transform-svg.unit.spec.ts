@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { parseAndTransformSvg } from './parse-and-transform-svg';
 
-// CLEANUP: https://github.com/arthur-plazanet/nuxt-compose-icons/issues/194
+// CLEANUP: https://github.com/arthu-pr/nuxt-compose-icons/issues/194
 describe('parseAndTransformSvg', () => {
   const svgViewBox = `viewBox="0 0 24 24"`;
   const svgOpeningTag = `<svg ${svgViewBox} xmlns="http://www.w3.org/2000/svg">`;

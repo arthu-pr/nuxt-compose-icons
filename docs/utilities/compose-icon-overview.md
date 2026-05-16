@@ -4,7 +4,19 @@ outline: [2, 3]
 
 # ComposeIconOverview
 
-A built-in component that renders a searchable, live-filtered grid of all icons registered in your app. Auto-imported by the module — no setup required.
+A built-in component that renders a searchable, live-filtered grid of all icons registered in your app.
+
+## Setup
+
+`ComposeIconOverview` is opt-in. Enable it in your `nuxt.config.ts`:
+
+```ts
+composeIcons: {
+  includeOverview: true,
+}
+```
+
+Once enabled it is auto-imported — no manual import needed.
 
 ---
 

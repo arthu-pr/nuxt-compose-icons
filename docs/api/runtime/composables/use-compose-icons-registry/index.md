@@ -4,4 +4,6 @@
 
 ## Functions
 
-- [useComposeIconRegistry](functions/useComposeIconRegistry.md)
+| Function                                                      | Description |
+| ------------------------------------------------------------- | ----------- |
+| [useComposeIconRegistry](functions/useComposeIconRegistry.md) | -           |

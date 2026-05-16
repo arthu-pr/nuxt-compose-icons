@@ -4,13 +4,19 @@
 
 ## Type Aliases
 
-- [DefaultSizes](type-aliases/DefaultSizes.md)
+| Type Alias                                   | Description                                                 |
+| -------------------------------------------- | ----------------------------------------------------------- |
+| [DefaultSizes](type-aliases/DefaultSizes.md) | Default icon sizes if none have been provided to the module |
 
 ## Variables
 
-- [iconSizeDefault](variables/iconSizeDefault.md)
+| Variable                                        | Description |
+| ----------------------------------------------- | ----------- |
+| [iconSizeDefault](variables/iconSizeDefault.md) | -           |
 
 ## Functions
 
-- [getIconSizeClass](functions/getIconSizeClass.md)
-- [isRawCssSize](functions/isRawCssSize.md)
+| Function                                          | Description                                             |
+| ------------------------------------------------- | ------------------------------------------------------- |
+| [getIconSizeClass](functions/getIconSizeClass.md) | Resolve Icon size class based on the provided size prop |
+| [isRawCssSize](functions/isRawCssSize.md)         | -                                                       |
