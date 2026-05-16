@@ -2,12 +2,12 @@
 
 [![npm version](https://img.shields.io/npm/v/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D)](https://npmjs.com/package/nuxt-compose-icons)
 [![npm downloads](https://img.shields.io/npm/dm/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D)](https://npmjs.com/package/nuxt-compose-icons)
-[![CI](https://github.com/arthur-plazanet/nuxt-compose-icons/actions/workflows/ci.yml/badge.svg)](https://github.com/arthur-plazanet/nuxt-compose-icons/actions)
+[![CI](https://github.com/arthu-pr/nuxt-compose-icons/actions/workflows/ci.yml/badge.svg)](https://github.com/arthu-pr/nuxt-compose-icons/actions)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/nuxt-compose-icons)](https://bundlephobia.com/package/nuxt-compose-icons)
-[![license](https://img.shields.io/github/license/arthur-plazanet/nuxt-compose-icons)](LICENSE)
+[![license](https://img.shields.io/github/license/arthu-pr/nuxt-compose-icons)](LICENSE)
 ![Nuxt](https://img.shields.io/badge/Nuxt-3-and-4-00DC82?logo=nuxt.js)
 ![types](https://img.shields.io/npm/types/nuxt-compose-icons)
-![last commit](https://img.shields.io/github/last-commit/arthur-plazanet/nuxt-compose-icons)
+![last commit](https://img.shields.io/github/last-commit/arthu-pr/nuxt-compose-icons)
 
 ---
 
