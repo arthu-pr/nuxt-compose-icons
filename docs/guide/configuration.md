@@ -157,14 +157,16 @@ These rarely need to be changed.
 
 ```ts
 // nuxt.config.ts — example with advanced options
-composeIcons: {
-  pathToIcons: './assets/icons',
-  fileFormat: 'ts',
-  hasIndexFile: true,
-  reRunOnBuild: false,
-  debug: true,
-  cacheDir: './.icon-cache',
-}
+ composeIcons: {
+   pathToIcons: './assets/icons',
+   component: {
+     fileFormat: 'ts',
+     hasIndexFile: true,
+   },
+   reRunOnBuild: false,
+   debug: true,
+   cacheDir: './.icon-cache',
+ }
 ```
 
 ---
