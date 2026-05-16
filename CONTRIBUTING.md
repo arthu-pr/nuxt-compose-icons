@@ -38,4 +38,4 @@ Open an issue and include:
 
 ## Questions
 
-Open a [discussion](https://github.com/arthurp/nuxt-compose-icons/discussions) for questions or ideas.
+Open a [discussion](https://github.com/arthu-pr/nuxt-compose-icons/discussions) for questions or ideas.

@@ -156,7 +156,7 @@ export interface NuxtComposeIconsOptions {
   dryRun?: boolean;
 
   /**
-   * Whether to re-run icon generation on every build. (bypassing the builte-in cache)
+   * Whether to re-run icon generation on every build. (bypassing the built-in cache)
    *
    * @type {?boolean}
    * @default false
