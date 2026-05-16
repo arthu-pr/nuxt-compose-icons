@@ -14,11 +14,11 @@ const iconSizes: ComposeIconSize = {
 const composeIconsOptions: NuxtComposeIconsOptions = {
   pathToIcons: fileURLToPath(new URL('./assets/icons', import.meta.url)),
   iconSizes,
-  generatedComponentOptions: {
+  component: {
     prefix: 'build',
     suffix: 'icon',
     case: 'kebab',
-    componentsDestDir: './components/nuxt-compose-icons',
+    destDir: './components/nuxt-compose-icons',
     fileFormat: 'ts',
   },
 };

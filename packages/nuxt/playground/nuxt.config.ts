@@ -15,12 +15,13 @@ export default defineNuxtConfig({
   composeIcons: {
     pathToIcons: fileURLToPath(new URL('./assets/icons', import.meta.url)),
     iconSizes,
-    generatedComponentOptions: {
+    component: {
       suffix: 'Icon',
       case: 'pascal',
-      componentsDestDir: './components/nuxt-compose-icons',
+      destDir: './components/nuxt-compose-icons',
       iconClasses: ['rt-icon'],
     },
+    includeOverview: true,
     // debug: true,
     // dryRun: true,
   },

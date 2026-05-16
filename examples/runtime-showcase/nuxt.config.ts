@@ -2,6 +2,11 @@ import type { NuxtComposeIconsOptions } from 'nuxt-compose-icons';
 
 const options: NuxtComposeIconsOptions = {
   pathToIcons: './app/assets/icons',
+  generatedComponentOptions: {
+    suffix: 'Icon',
+    case: 'pascal',
+    // destDir: './app/components/icons',
+  },
   iconSizes: {
     xs: '0.5rem',
     sm: '0.875rem',
@@ -9,18 +14,6 @@ const options: NuxtComposeIconsOptions = {
     lg: '2rem',
     xl: '4rem',
   },
-  generatedComponentOptions: {
-    suffix: 'Icon',
-    case: 'pascal',
-
-    // relative path
-    // componentsDestDir: './app/components/icons',
-
-    // absolute path
-    // componentsDestDir: path.resolve('./app/components/ui/icons'),
-  },
-
-  // dryRun: true,
 };
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({

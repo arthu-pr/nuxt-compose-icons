@@ -1,5 +1,11 @@
 {
-  "entryPoints": ["./packages/nuxt/src/**/*.ts"],
+  "entryPoints": [
+    "./packages/nuxt/src/module.ts",
+    "./packages/nuxt/src/runtime/types/index.ts",
+    "./packages/nuxt/src/runtime/composables/use-compose-icon.ts",
+    "./packages/nuxt/src/runtime/composables/use-compose-icons-registry.ts",
+    "./packages/nuxt/src/runtime/utils/icon-theming.ts"
+  ],
   "name": "nuxt-compose-icons",
 
   "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
@@ -18,19 +24,19 @@
     "**/__tests__/**",
     "**/.pnpm/**"
   ],
-  "indexFormat": "list",
+  "indexFormat": "table",
   "useCodeBlocks": true,
   "packageOptions": {
     "name": "nuxt-compose-icons",
     "excludeNotExported": true,
     "readme": "README.md"
   },
-  "disableSources": true,
+  "disableSources": false,
   "sidebar": {
     "autoConfiguration": true,
     "format": "vitepress",
     "pretty": true,
-    "collapsed": true
+    "collapsed": false
   },
   "jsDocCompatibility": {
     "exampleTag": true,
