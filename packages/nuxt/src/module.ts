@@ -156,10 +156,10 @@ export interface NuxtComposeIconsOptions {
   dryRun?: boolean;
 
   /**
-   * Whether to re-run icon generation on every build.
+   * Whether to re-run icon generation on every build. (bypassing the builte-in cache)
    *
    * @type {?boolean}
-   * @default true
+   * @default false
    */
   reRunOnBuild?: boolean;
 
@@ -220,7 +220,7 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
       fileFormat: 'ts',
       hasIndexFile: false,
     },
-    reRunOnBuild: true,
+    reRunOnBuild: false,
     iconComponentList: {},
     includeOverview: false,
     includeComposables: true,
@@ -314,6 +314,10 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
     if (!pathToIcons) return;
 
     // Resolve the path to the icons directory provided
+    //  it can be provided with many different formats:
+    //  - absolute path: /Users/arthur/icons
+    //  - relative path from project root: ./icons or icons
+    // We resolve it to an absolute path
     const absolutePathToIcons = assertAbsolute(
       path.isAbsolute(pathToIcons) ? pathToIcons : resolveApp(pathToIcons),
     );
@@ -351,7 +355,9 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
       optionsHash,
       options.cacheDir,
     );
-    await cache.load();
+    if (!options.reRunOnBuild) {
+      await cache.load();
+    }
 
     /*
      * For each SVG file we:
@@ -442,19 +448,33 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
       }),
     );
 
-    await cache.save();
+    if (!options.reRunOnBuild) {
+      await cache.save();
+    }
 
     // 7. Generate a CSS file with the icon sizes and add it to the Nuxt app's CSS array
-    const baseIconStyles = resolve('runtime/assets/compose-icon.css');
-    nuxt.options.css.push(baseIconStyles);
+    const baseIconStylesPath = resolve('runtime/assets/compose-icon.css');
+    nuxt.options.css.push(baseIconStylesPath);
 
     const cssFileContent = generateCssFile({ iconSizes, iconClasses: iconComponentClasses });
     const completeIconStyles = optimizeCss(cssFileContent);
+    const cssFileName = 'compose-icon-sizes.css';
     const tpl = addTemplate({
-      filename: 'compose-icon-sizes.css',
+      filename: cssFileName,
       getContents: () => completeIconStyles,
     });
     nuxt.options.css.push(tpl.dst);
+
+    // Custom destDir only: concatenate base + generated CSS into one file so it travels with components
+    if (componentsDir !== defaultDir) {
+      const baseIconStylesContent = await fsp.readFile(baseIconStylesPath, 'utf-8');
+      const combinedCssFileName = 'compose-icons.css';
+      const combinedStyles = optimizeCss(`${baseIconStylesContent}\n${cssFileContent}`);
+      await writeFile(
+        assertAbsolute(path.join(componentsDir, combinedCssFileName)),
+        combinedStyles,
+      );
+    }
 
     if (options.debug) {
       logger.info(`📦 - Registering components from ${componentsDir}`);
