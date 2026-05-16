@@ -1,5 +1,11 @@
 # nuxt-compose-icons
 
+## 0.7.0
+
+### Minor Changes
+
+- 95dcf53: Clean-up and readability fixes
+
 ## 0.6.9
 
 ### Patch Changes
