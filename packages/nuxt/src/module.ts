@@ -350,7 +350,7 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
     });
     const resolvedCacheDir = options.cacheDir
       ? resolveApp(options.cacheDir)
-      : resolveBuild('nuxt-compose-icons');
+      : resolveApp('node_modules/.cache/nuxt-compose-icons');
     const cache = new SvgProcessingCache(resolvedCacheDir, optionsHash, nuxt.options.rootDir);
     if (!options.reRunOnBuild) {
       await cache.load();
