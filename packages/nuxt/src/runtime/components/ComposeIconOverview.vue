@@ -1,13 +1,14 @@
 <template>
-  <div class="runtime-showcase" :style="runtimeShowcaseStyle">
+  <div class="runtime-showcase">
     <input v-model="q" type="text" placeholder="Search icons…" class="runtime-showcase__search" />
-    <div
-      v-for="icon in filtered"
-      :key="icon.pascalName"
-      class="runtime-showcase__item"
-      :data-icon-name="icon.kebabName"
-    >
-      <Component :is="icon.component" v-bind="iconProps" />
+    <div class="runtime-showcase__grid">
+      <div v-for="icon in filtered" :key="icon.pascalName" class="runtime-showcase__item">
+        <Component :is="icon.component" v-bind="iconProps" />
+        <template v-if="hasIconName">
+          <span class="runtime-showcase__pascal">&lt;{{ icon.pascalName }} /&gt;</span>
+          <span class="runtime-showcase__kebab">{{ icon.kebabName }}</span>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -41,47 +42,64 @@ const filtered = computed(() => {
   );
 });
 
-const runtimeShowcaseStyle = computed(() => {
-  return props.hasIconName ? '--has-icon-name: ;' : '';
-});
-
 const iconProps = computed(() => {
   const entries = Object.entries(props).filter(([k]) => k !== 'hasIconName' && k !== 'icons');
   return Object.fromEntries(entries) as ComposeIconProps;
 });
 </script>
+
 <style scoped>
 .runtime-showcase {
-  --has-icon-name: initial;
-  container-type: inline-size;
-  column-width: 18rem;
-  column-gap: 0.5rem;
+  &__search {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: inherit;
+    box-sizing: border-box;
 
-  & > * + * {
-    margin-top: 1rem;
+    &::placeholder {
+      color: #555;
+    }
   }
 
-  &__search {
-    column-span: all;
-    font-size: clamp(5.6526rem, 5.4068rem + 1.2288cqi, 6.3592rem);
-    display: block;
-    margin-bottom: 1rem;
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 1rem;
   }
 
   &__item {
-    /* display: grid; */
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 0.5rem;
+    border-radius: 6px;
+    text-align: center;
+    min-width: 0;
 
-    &[data-icon-name] {
-      &::after {
-        content: var(--has-icon-name) attr(data-icon-name);
-        display: block;
-        font-size: var(--font-size-xs);
-        color: var(--color-muted);
-        text-align: center;
-        margin-top: var(--spacing-sm);
-      }
+    &:hover {
+      background: #222;
     }
+  }
+
+  &__pascal {
+    font-size: 0.6rem;
+    color: #888;
+    word-break: break-all;
+    line-height: 1.3;
+  }
+
+  &__kebab {
+    font-size: 0.6rem;
+    color: #555;
+    word-break: break-all;
+    line-height: 1.3;
   }
 }
 </style>

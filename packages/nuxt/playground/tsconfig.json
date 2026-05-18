@@ -5,8 +5,6 @@
     "paths": {
       "~/*": ["./*"],
       "@nuxt-compose-icons": ["../src/runtime/*"],
-      "@nuxt-compose-icons/utils": ["nuxt-compose-icons"],
-      "@nuxt-compose-icons/types": ["nuxt-compose-icons"],
       "@nuxt-compose-icons/assets": ["../src/runtime/assets/*"]
     }
   }

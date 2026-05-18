@@ -1,16 +1,18 @@
 <template>
+  <!-- <YContainer> -->
   <GettingStarted />
-  <Wrapper>
+  <YContainer>
     <ClocheIcon size="sm" color="#c1272d" />
     <ClientOnly>
       <IconTheming />
       <IconOverview stroke-width="3" :size="'sm'" color="#c1272d" />
     </ClientOnly>
-  </Wrapper>
+  </YContainer>
+  <!-- </YContainer> -->
 </template>
 
 <script setup lang="ts">
-import { Wrapper } from '@use-compose/ui';
+import { YContainer } from '@use-compose/ui';
 import GettingStarted from '~/components/GettingStarted.vue';
 
 // import { useComposeIcon } from 'nuxt-compose-icons';
