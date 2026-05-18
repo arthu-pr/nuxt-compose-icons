@@ -4,7 +4,7 @@
       <label class="controls__field">
         <span>Size</span>
         <select v-model="size">
-          <option v-for="s in sizes" :key="s" :value="s">{{ s }}</option>
+          <option v-for="s in sizes" :key="s" :value="s">{{ s }} — {{ iconSizes[s] }}</option>
         </select>
       </label>
 
@@ -106,67 +106,65 @@ body {
   border-right: 1px solid #2a2a2a;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
   position: sticky;
   top: 0;
   height: 100svh;
+}
 
-  &__field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    font-size: 0.75rem;
-    color: #999;
+.controls__field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #999;
+}
 
-    select,
-    input[type='range'] {
-      width: 100%;
-      accent-color: #c1272d;
-    }
+.controls__field select,
+.controls__field input[type='range'] {
+  accent-color: #c1272d;
+}
 
-    input[type='color'] {
-      width: 2rem;
-      height: 2rem;
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: 0;
+.controls__field input[type='color'] {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
 
-      &:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-      }
-    }
+.controls__field input[type='color']:disabled,
+.controls__field input[type='range']:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
 
-    input[type='range']:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-  }
+.controls__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  &__label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.controls__value {
+  font-size: 0.7rem;
+  color: #666;
+}
 
-  &__value {
-    font-size: 0.7rem;
-    color: #666;
-  }
-
-  &__meta {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    font-size: 0.7rem;
-    color: #555;
-  }
+.controls__meta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  color: #555;
 }
 
 .overview {
   padding: 2rem;
   overflow-y: auto;
+  background-color: #232323;
 }
 </style>

@@ -6,7 +6,6 @@
         <Component :is="icon.component" v-bind="iconProps" />
         <template v-if="hasIconName">
           <span class="runtime-showcase__pascal">&lt;{{ icon.pascalName }} /&gt;</span>
-          <span class="runtime-showcase__kebab">{{ icon.kebabName }}</span>
         </template>
       </div>
     </div>
@@ -49,57 +48,48 @@ const iconProps = computed(() => {
 </script>
 
 <style scoped>
-.runtime-showcase {
-  &__search {
-    display: block;
-    width: 100%;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    padding: 0.5rem 0.75rem;
-    background: transparent;
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: inherit;
-    box-sizing: border-box;
+.runtime-showcase__search {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: inherit;
+  box-sizing: border-box;
+}
 
-    &::placeholder {
-      color: #555;
-    }
-  }
+.runtime-showcase__search::placeholder {
+  color: #555;
+}
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-    gap: 1rem;
-  }
+.runtime-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
 
-  &__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.75rem 0.5rem;
-    border-radius: 6px;
-    text-align: center;
-    min-width: 0;
+.runtime-showcase__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 0.75rem;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 0;
+}
 
-    &:hover {
-      background: #222;
-    }
-  }
+.runtime-showcase__item:hover {
+  background: #222;
+}
 
-  &__pascal {
-    font-size: 0.6rem;
-    color: #888;
-    word-break: break-all;
-    line-height: 1.3;
-  }
-
-  &__kebab {
-    font-size: 0.6rem;
-    color: #555;
-    word-break: break-all;
-    line-height: 1.3;
-  }
+.runtime-showcase__pascal {
+  font-size: 1rem;
+  color: #888;
+  word-break: break-all;
+  line-height: 1.3;
 }
 </style>
