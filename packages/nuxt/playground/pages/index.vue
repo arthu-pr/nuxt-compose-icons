@@ -70,7 +70,7 @@ const { icons } = useComposeIconRegistry();
 const { sizes: iconSizes } = useComposeIconTheme();
 const sizes = Object.keys(iconSizes);
 
-const size = ref('lg');
+const size = ref(sizes.includes('lg') ? 'lg' : sizes[0]);
 
 const fillEnabled = ref(false);
 const fillColor = ref('#ffffff');
