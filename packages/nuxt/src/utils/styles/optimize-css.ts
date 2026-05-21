@@ -3,6 +3,6 @@ export function optimizeCss(css: string): string {
     .replace(/\/\*[\s\S]*?\*\//g, '')
     .replace(/\s+/g, ' ')
     .replace(/\s*([{}:;,])\s*/g, '$1')
-    .replace(/;}/g, '}')
+    .replace(/;\}/g, '}')
     .trim();
 }
