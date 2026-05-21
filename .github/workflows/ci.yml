@@ -59,8 +59,8 @@ jobs:
       - name: Download playground artifact
         uses: actions/download-artifact@v8
         with:
-          name: playground-build
-          path: ./playground-build
+          name: playground-static
+          path: ./playground-static
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -79,5 +79,5 @@ jobs:
       - name: Deploy docs-build with rsync
         run: rsync -avz ./docs-build/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/nuxt-icons.use-compose.com/
 
-      - name: Deploy playground-build with rsync
-        run: rsync -avz ./playground-build/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/nuxt-icons-playground.use-compose.com/
+      - name: Deploy playground-static with rsync
+        run: rsync -avz ./playground-static/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/nuxt-icons-playground.use-compose.com/
