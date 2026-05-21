@@ -23,10 +23,7 @@ const composeIconsOptions: NuxtComposeIconsOptions = {
   },
 };
 export default defineNuxtConfig({
-  devServer: {
-    host: 'localhost',
-    port: 3589,
-  },
+  ssr: true,
   modules: [MyModule],
   composeIcons: composeIconsOptions,
   components: [

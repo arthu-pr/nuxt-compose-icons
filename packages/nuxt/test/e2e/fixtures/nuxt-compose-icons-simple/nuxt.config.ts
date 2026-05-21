@@ -3,10 +3,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 import MyModule from '../../../../src/module';
 
 export default defineNuxtConfig({
-  devServer: {
-    host: 'localhost',
-    port: 3590,
-  },
+  ssr: true,
   modules: [MyModule],
   composeIcons: {
     pathToIcons: fileURLToPath(new URL('./assets/icons', import.meta.url)),
