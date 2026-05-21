@@ -1,10 +1,8 @@
-import type { NuxtComposeIconsOptions } from '../../src/module';
+import type { IconComponentOptions } from '../../src/module';
 
 export { moduleOptionsMock };
 
-const moduleOptionsMock: NuxtComposeIconsOptions = {
-  generatedComponentOptions: {
-    suffix: 'Icon',
-    case: 'pascal',
-  },
+const moduleOptionsMock: IconComponentOptions = {
+  suffix: 'Icon',
+  case: 'pascal',
 };

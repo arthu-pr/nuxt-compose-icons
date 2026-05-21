@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 import { moduleOptionsMock } from '../../../test/mocks/nuxt-compose-icons-options';
-import type { NuxtComposeIconsOptions } from '../../module';
+import type { IconComponentOptions } from '../../module';
 import { generateComponentName } from './generate-component-name';
 
 describe('generateComponentName', () => {
-  let options: NuxtComposeIconsOptions;
+  let options: IconComponentOptions;
 
   beforeEach(() => {
     options = moduleOptionsMock;

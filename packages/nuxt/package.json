@@ -17,8 +17,6 @@
   },
   "dependencies": {
     "@nuxt/kit": "4.2.2",
-    "lightningcss": "1.32.0",
-    "node-html-parser": "7.1.0",
     "svg-parser": "2.0.4",
     "svgo": "4.0.1"
   },

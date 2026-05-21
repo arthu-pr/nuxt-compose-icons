@@ -1,3 +1,5 @@
+import type { ComposeIconSize } from 'nuxt-compose-icons/types';
+
 export function useRuntimeIconsState() {
   const search = ref('');
 
