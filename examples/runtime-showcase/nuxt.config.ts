@@ -2,11 +2,13 @@ import type { NuxtComposeIconsOptions } from 'nuxt-compose-icons';
 
 const options: NuxtComposeIconsOptions = {
   pathToIcons: './app/assets/icons',
-  generatedComponentOptions: {
+  component: {
     suffix: 'Icon',
     case: 'pascal',
     // destDir: './app/components/icons',
   },
+  includeComposables: true,
+  includeOverview: true,
   iconSizes: {
     xs: '0.5rem',
     sm: '0.875rem',

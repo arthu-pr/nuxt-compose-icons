@@ -25,3 +25,5 @@ logs
 
 
 app/components/icons
+
+test/coverage

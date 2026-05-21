@@ -1,31 +1,22 @@
 <template>
-  <div class="getting-started">
+  <YStack class="getting-started" style="--gutter: var(--layout-gutter-lg)">
     <h2 class="title">Getting Started (source: https://nuxt-icons.use-compose.com/)</h2>
-    <div class="code-highlighter">
-      <CodeHighlighter multi :code="arrayCode" />
-    </div>
-    <!-- 
-    <div class="code-vue">
-      <CodeHighlighter lang="html" :code="codeVue" title="Vue Component Usage" />
-    </div>
-    <div class="code-config">
-      <CodeHighlighter lang="typescript" :code="codeConfig" title="nuxt.config.ts" />
-    </div>
-    <div class="code-dot-nuxt">
-      <CodeHighlighter
-        lang="typescript"
-        :code="codeDotNuxt"
-        title=".nuxt/icons-generated/components.ts"
-      />
-    </div> -->
-  </div>
+    <!-- <div class="code-highlighter"> -->
+    <YRow type="switcher">
+      <CodeHighlighter v-bind="baseSvgConfig" />
+      <CodeHighlighter v-bind="vueComponentsConfig" />
+    </YRow>
+    <YRow type="switcher">
+      <CodeHighlighter v-bind="nuxtConfigConfig" />
+      <CodeHighlighter v-bind="nuxtBuildConfig" />
+    </YRow>
+  </YStack>
 </template>
 
 <script setup lang="ts">
+import { YRow, YStack } from '@use-compose/ui';
 // https://github.com/vuejs/vitepress/issues/603
-const codeSvg = `
-\`\`\`graphql
-icons/                                       
+const svgFilesTemplate = `├── icons
   ├─ pictos_modules_chronologie.svg                     
   ├─ add-note.svg                                       
   ├─ delete.svg                                         
@@ -33,9 +24,9 @@ icons/
   ├─ link.svg                                           
   ├─ trash.svg                                          
   └─ twitter.svg                                         
-\`\`\``;
+`;
 
-const codeConfig = `// nuxt.config.ts
+const nuxtConfigTemplate = `// nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['nuxt-compose-icons'],
   composeIcons: {
@@ -47,7 +38,7 @@ export default defineNuxtConfig({
   },
 });`;
 
-const codeVue = `<template>
+const vueComponentsTemplate = `<template>
   <section>
     <!-- add-note.svg -->
     <AddNoteIcon size="2rem" color="var(--primary)" />
@@ -61,7 +52,7 @@ const codeVue = `<template>
 </template>
 `;
 
-const codeDotNuxt = `/* At build time, generated components appear in .nuxt/components.d.ts
+const nuxtBuildTemplate = `/* At build time, generated components appear in .nuxt/components.d.ts
 * Each SVG becomes a fully typed Vue component
 */
 
@@ -74,28 +65,27 @@ const codeDotNuxt = `/* At build time, generated components appear in .nuxt/comp
 
 // alongside all your own components`;
 
-const arrayCode = [
-  {
-    code: codeSvg,
-    lang: 'md',
-    title: 'SVG Directory',
-  },
-  {
-    code: codeVue,
-    lang: 'html',
-    title: 'Vue Component',
-  },
-  {
-    code: codeConfig,
-    lang: 'typescript',
-    title: 'Nuxt config',
-  },
-  {
-    code: codeDotNuxt,
-    lang: 'typescript',
-    title: 'Components.ts',
-  },
-];
+const baseSvgConfig = {
+  code: svgFilesTemplate,
+  lang: 'graphql',
+  title: 'SVG Directory',
+};
+
+const vueComponentsConfig = {
+  code: vueComponentsTemplate,
+  lang: 'html',
+  title: 'Vue Component',
+};
+const nuxtConfigConfig = {
+  code: nuxtConfigTemplate,
+  lang: 'typescript',
+  title: 'Nuxt config',
+};
+const nuxtBuildConfig = {
+  code: nuxtBuildTemplate,
+  lang: 'typescript',
+  title: 'Components.d.ts',
+};
 </script>
 
 <style>
