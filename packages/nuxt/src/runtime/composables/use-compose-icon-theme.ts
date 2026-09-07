@@ -3,7 +3,7 @@ import type { PublicIconSizes } from '../types/icon-sizes';
 import { resolveDefaultSizeKey } from '../utils/icon-sizing';
 import { iconSizesKey } from '../utils/sizes-injection-key';
 
-export interface ComposeIconTheme {
+interface ComposeIconTheme {
   /** All configured size keys and their resolved CSS values */
   iconSizes: Record<string, string>;
   /** The key used when no `size` prop is passed — same resolution generated components use */

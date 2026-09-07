@@ -116,9 +116,9 @@ interface UseComposeIcon {
 ## useComposeIconTheme
 
 Read-only access to the module's **configured size scale** — the resolved `iconSizes` (defaults,
-or your own scale if you set one, see [Sizing](/utilities/sizing)). Useful when you need to
-reference a size outside of a generated icon component, e.g. to build a size-picker UI or align
-a non-icon element to the same scale.
+or your own scale if you set one). Useful when you need to reference a size outside of a
+generated icon component, e.g. to build a size-picker UI or align a non-icon element to the
+same scale.
 
 This is purely a size-token accessor, not a general theming API — colors and stroke are
 controlled by the CSS variables in [Theming](/utilities/theming), not by this composable.
