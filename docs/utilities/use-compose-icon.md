@@ -28,8 +28,6 @@ This utility can be useful when you want to apply icon-related styles manually, 
 - Consistent **size scaling** via a design system.
 - CSS-driven theming support using variables.
 
----
-
 You can use `useComposeIcon` in any component that uses design tokens or dynamic CSS variables.
 
 ### Usage

@@ -37,8 +37,6 @@ That's it. Every `.svg` in `./assets/icons` becomes a typed, auto-imported Vue c
 | `defaultSize`            | `string`                 | `'md'` if present     | Size key used when no `size` prop is passed.                                            |
 | `includeComposables`     | `boolean`                | `true`                | Auto-imports `useComposeIcon` and `useComposeIconTheme`.                                |
 
----
-
 ### `pathToIcons`
 
 - **Type:** `string`
@@ -143,8 +141,6 @@ a warning and falls back to `'md'`, then the first configured key.
 - **Default:** `true`
 - Auto-imports [`useComposeIcon`](/utilities/use-compose-icon) and [`useComposeIconTheme`](/utilities/use-compose-icon#usecomposeicontheme). Set to `false` if you only use the generated components and don't need these directly.
 
----
-
 ## Advanced options
 
 These rarely need to be changed.
@@ -155,8 +151,6 @@ These rarely need to be changed.
 | `reRunOnBuild` | `boolean` | `false`                                  | Re-generate icons on every build, bypassing the cache        |
 | `debug`        | `boolean` | `false`                                  | Show per-component generation logs during setup              |
 | `cacheDir`     | `string`  | `node_modules/.cache/nuxt-compose-icons` | SVG processing cache — speeds up rebuilds, safe to gitignore |
-
----
 
 ### `dryRun`
 
@@ -195,8 +189,6 @@ These rarely need to be changed.
    cacheDir: './.icon-cache',
  }
 ```
-
----
 
 ## CSS integration
 

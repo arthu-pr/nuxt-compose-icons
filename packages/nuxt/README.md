@@ -27,8 +27,6 @@ For building design systems or simply use in-house icons.
 
 <img height="24" alt="image" src="https://github.com/user-attachments/assets/0c9ff8dc-e688-41fa-856a-41a18e972a54" style="padding-right: 10px" align="left" /> Used in production at [reteach](https://www.reteach.com/)
 
----
-
 ## 📦 Installation
 
 Using pnpm:
@@ -48,8 +46,6 @@ Using yarn
 ```bash
 yarn add nuxt-compose-icons
 ```
-
----
 
 ## 🛠 Quick start
 
@@ -74,8 +70,6 @@ export default defineNuxtConfig({
 ```
 
 That's it. Every `.svg` becomes a typed, auto-imported Vue component.
-
----
 
 ## 🎯 Motivation
 
@@ -124,8 +118,6 @@ Nuxt also has an excellent official icon module, [`@nuxt/icon`](https://github.c
 
 → [Full feature list with examples](https://nuxt-compose-icons.dev/guide/features)
 
----
-
 ## Own your components
 
 Each icon is a real, standalone Vue component — not a runtime lookup like `<Icon name="my:user-badge" />`. That distinction matters once icons need to live outside a single Nuxt app:
@@ -140,21 +132,15 @@ This is the intended use case: a design system or in-house icon library where ic
 
 → Full walkthrough, CI wiring, and a live example repo (Nx + pnpm): [Monorepo guide](https://nuxt-compose-icons.dev/guide/monorepo)
 
----
-
 ## 📖 Documentation
 
 Full documentation and advanced configuration:
 
 👉 [https://nuxt-compose-icons.dev](https://nuxt-compose-icons.dev/)
 
----
-
 ## ▶️ Try it
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/arthu-pr/nuxt-compose-icons/tree/main/examples/runtime-showcase)
-
----
 
 ## 🗺 Roadmap
 
