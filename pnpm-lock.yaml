@@ -155,8 +155,8 @@ importers:
         specifier: 2.0.4
         version: 2.0.4
       svgo:
-        specifier: 4.0.2
-        version: 4.0.2
+        specifier: 4.1.0
+        version: 4.1.0
     devDependencies:
       '@nuxt/devtools':
         specifier: 3.3.1
@@ -12276,7 +12276,7 @@ snapshots:
     dependencies:
       postcss: 8.5.28
       postcss-value-parser: 4.2.0
-      svgo: 4.0.2
+      svgo: 4.1.0
 
   postcss-svgo@8.0.6(postcss@8.5.28):
     dependencies:
