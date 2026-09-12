@@ -22,7 +22,7 @@
     "@nuxt/kit": "4.2.2",
     "defu": "6.1.7",
     "svg-parser": "2.0.4",
-    "svgo": "4.0.2"
+    "svgo": "4.1.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "3.3.1",
