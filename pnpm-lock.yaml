@@ -152,8 +152,8 @@ importers:
         specifier: 6.1.7
         version: 6.1.7
       svg-parser:
-        specifier: 2.0.4
-        version: 2.0.4
+        specifier: 2.0.5
+        version: 2.0.5
       svgo:
         specifier: 4.0.2
         version: 4.0.2
@@ -5888,6 +5888,10 @@ packages:
 
   svg-parser@2.0.4:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
+
+  svg-parser@2.0.5:
+    resolution: {integrity: sha512-FuT74puvVMJQ8sgFxgOKPex5MbxPeltqCXJV3wR9Xq+vPHaF+tTdE1lhJcwspUxjtjvXy1NwqcSLZx9UNwHawg==}
+    engines: {node: '>=8'}
 
   svg-tags@1.0.0:
     resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
@@ -14242,6 +14246,8 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   svg-parser@2.0.4: {}
+
+  svg-parser@2.0.5: {}
 
   svg-tags@1.0.0: {}
 
