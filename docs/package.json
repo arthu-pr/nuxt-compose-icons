@@ -14,7 +14,7 @@
     "@use-compose/logger": "0.0.6",
     "@use-compose/ui": "1.2.0",
     "@wdns/vue-code-block": "2.3.5",
-    "highlight.js": "11.11.1",
+    "highlight.js": "11.11.2",
     "vue": "3.5.31",
     "vue-code-highlighter": "1.1.3"
   },
