@@ -22,6 +22,6 @@
     "noUncheckedSideEffectImports": true,
     "composite": true
   },
-  "include": ["packages/**/*", "docs/**/*"],
+  "include": ["packages/**/*.ts", "packages/**/*.vue", "docs/**/*.ts", "docs/**/*.vue"],
   "exclude": ["node_modules", "dist", ".nuxt"]
 }
