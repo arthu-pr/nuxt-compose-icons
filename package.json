@@ -55,7 +55,7 @@
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "nuxt": "4.5.2",
-    "prettier": "3.8.1",
+    "prettier": "3.8.5",
     "prettier-plugin-organize-imports": "4.3.0",
     "stylelint": "17.6.0",
     "stylelint-config-recommended-vue": "1.6.1",
