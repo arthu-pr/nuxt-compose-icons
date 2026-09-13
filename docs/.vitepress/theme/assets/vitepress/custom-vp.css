@@ -11,8 +11,14 @@
 
 .VPNav {
   .container {
-    margin: 0;
-    width: min(var(--breakpoint-sm), calc(100% - 2 * var(--layout-mobile-padding)));
+    /* margin: 0; */
+    /* width: min(var(--breakpoint-sm), calc(100% - 2 * var(--layout-mobile-padding))); */
+
+    /* ⚠️ Mock styling of y-wrapper to fit banner content */
+    box-sizing: border-box;
+    width: min(var(--breakpoint-md), calc(100% - var(--layout-mobile-padding)));
+    margin-inline-start: auto;
+    margin-inline-end: auto;
   }
 
   .wrapper {
@@ -50,7 +56,7 @@ h4.heading-h4 {
 }
 
 .home-layout .VPNavBarTitle a svg {
-  height: 70%;
+  height: 100%;
 }
 
 .home-layout .VPDoc.has-aside .content-container {
