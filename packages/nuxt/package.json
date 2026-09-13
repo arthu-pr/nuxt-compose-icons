@@ -41,7 +41,7 @@
     "publint": "0.3.24",
     "typescript": "6.0.2",
     "vitest": "4.1.11",
-    "vue": "3.5.31",
+    "vue": "3.5.42",
     "vue-tsc": "3.2.6"
   },
   "engines": {
