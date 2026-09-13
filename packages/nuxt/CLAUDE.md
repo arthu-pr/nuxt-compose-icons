@@ -38,9 +38,12 @@ module. See [`../../CLAUDE.md`](../../CLAUDE.md) for repo-wide commands and conv
   `multipass` saved 0 bytes on every icon (it only reorders attributes) for
   ~120% more time. Re-measure before re-enabling.
 - Generated output (icon components, playground/e2e-fixture components,
-  `docs/api` typedoc, coverage) must stay out of prettier/stylelint/eslint
-  gates and is gitignored — codegen changes never show in a diff, verify them
-  on disk instead.
+  coverage) must stay out of prettier/stylelint/eslint gates and is
+  gitignored — codegen changes never show in a diff, verify them on disk
+  instead. `docs/api` (typedoc) is the one exception: it's tracked and
+  committed, since nothing runs `typedoc` automatically (`docs:build` is
+  just `vitepress build`) — run `pnpm typedoc` and commit the diff by hand
+  whenever the public API surface changes.
 - The icon registry, `<ComposeIconOverview />`, and `includeOverview` were
   removed entirely — their only real consumer was one bundled search
   component that any project can replicate in a few lines by iterating the
@@ -59,7 +62,7 @@ module. See [`../../CLAUDE.md`](../../CLAUDE.md) for repo-wide commands and conv
   without a real report.
 - Every generated component depends on `runtime/plugins/provide-sizes.ts`
   (registered via `addPlugin`) for its default size — it bridges
-  `runtimeConfig.public.composeIcons.sizes` to plain Vue `provide`/`inject`
+  `runtimeConfig.public.composeIcons.iconSizes` to plain Vue `provide`/`inject`
   (`iconSizesKey`). This is deliberate: `useComposeIconTheme` used to
   import `useRuntimeConfig` from `nuxt/app` directly, which fails to even
   _resolve_ outside a real Nuxt build (`#build/nuxt.config.mjs` is a virtual

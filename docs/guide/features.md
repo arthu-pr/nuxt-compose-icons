@@ -57,8 +57,12 @@ The aim is to combine the control and quality of hand-authored components with t
 | **Scaling**            | Dependent on library updates | Maintenance-heavy     | Flexible but unstructured       | Structured, build-generated |
 | **Nuxt integration**   | ✅ Works                     | ✅ Auto-importable    | ⚠️ Requires configuration       | ✅ Native auto-import       |
 
-`@nuxt/icon` is the most common example of the "Third-party Libraries" column above — if you're
-specifically weighing it against this module, here's a direct comparison:
+`@nuxt/icon` is the most common example of the "Third-party Libraries" column above.
+[`nuxt-icons`](https://github.com/gitFoxCode/nuxt-icons) doesn't fit that column — it's
+bring-your-own-SVG like this module — but it's a runtime name-lookup (`<nuxt-icon name="..." />`
+injecting SVG markup at render time) rather than generating standalone components, so it lands
+on the same side of that specific distinction as `@nuxt/icon`. If you're specifically weighing
+this module against `@nuxt/icon`, here's a direct comparison:
 
 ## How This Compares to `@nuxt/icon`
 
