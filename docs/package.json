@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "nuxt-compose-icons": "workspace:*",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitepress": "1.6.4"
   },
   "files": [
