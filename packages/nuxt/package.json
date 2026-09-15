@@ -21,28 +21,28 @@
   "dependencies": {
     "@nuxt/kit": "4.2.2",
     "defu": "6.1.7",
-    "svg-parser": "2.0.4",
+    "svg-parser": "2.0.5",
     "svgo": "4.0.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "3.3.1",
     "@nuxt/eslint-config": "1.15.2",
-    "@nuxt/module-builder": "1.0.2",
+    "@nuxt/module-builder": "1.0.3",
     "@nuxt/schema": "4.2.2",
-    "@nuxt/test-utils": "4.0.0",
+    "@nuxt/test-utils": "4.0.3",
     "@types/node": "26.4.1",
     "@types/svg-parser": "2.0.6",
-    "@vitest/coverage-v8": "4.1.2",
-    "@vitest/ui": "4.1.2",
+    "@vitest/coverage-v8": "4.1.11",
+    "@vitest/ui": "4.1.11",
     "changelogen": "0.6.2",
-    "eslint": "9.39.4",
-    "nuxt": "4.5.1",
+    "eslint": "9.39.5",
+    "nuxt": "4.5.2",
     "playwright-core": "1.58.2",
     "publint": "0.3.24",
-    "typescript": "6.0.2",
-    "vitest": "4.1.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.11",
     "vue": "3.5.31",
-    "vue-tsc": "3.2.6"
+    "vue-tsc": "3.2.9"
   },
   "engines": {
     "node": ">=22.0.0"
