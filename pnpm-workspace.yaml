@@ -1,11 +1,9 @@
-# pnpm-workspace.yaml
-
 packages:
   - packages/**
   - docs
   - examples/**
 overrides:
-  vue: 3.5.31
+  vue: 3.5.42
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
