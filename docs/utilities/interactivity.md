@@ -14,8 +14,6 @@ Icon properties are based on **CSS Custom Properties**, you can easily create in
 
 If you use Design Tokens, interactivity can be done through them as well, depending on your token setup and your schema (some example can be found in [Interactions](https://tokenpedia.ds.house/terms/interaction/)).
 
----
-
 ## 🎮 Hover and Active States
 
 ```css

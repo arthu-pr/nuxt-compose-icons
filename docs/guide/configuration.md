@@ -33,10 +33,9 @@ That's it. Every `.svg` in `./assets/icons` becomes a typed, auto-imported Vue c
 | `component.fileFormat`   | `'ts' \| 'vue'`          | `'ts'`                | Output format. `.ts` recommended.                                                       |
 | `component.hasIndexFile` | `boolean`                | `false`               | Write an `index.ts` barrel file in `destDir`.                                           |
 | `component.iconClasses`  | `string \| string[]`     | `[]`                  | Extra CSS classes on every icon.                                                        |
-| `iconSizes`              | `Record<string, string>` | `{ sm, md, lg, xl }`  | CSS size variables and classes.                                                         |
+| `iconSizes`              | `Record<string, string>` | `{ sm, md, lg, xl }`  | CSS size variables and classes. **Replaces** the defaults entirely when set.            |
+| `defaultSize`            | `string`                 | `'md'` if present     | Size key used when no `size` prop is passed.                                            |
 | `includeComposables`     | `boolean`                | `true`                | Auto-imports `useComposeIcon` and `useComposeIconTheme`.                                |
-
----
 
 ### `pathToIcons`
 
@@ -100,17 +99,47 @@ Groups all options related to how components are generated and where they are wr
 { sm: '1.5rem', md: '2rem', lg: '3rem', xl: '4rem' }
 ```
 
-Your sizes are merged on top of these defaults, so keys you don't define stay available.
+Setting `iconSizes` **fully replaces** the defaults — it's your whole scale, not a patch on top
+of it. Leave it out entirely to keep the defaults unchanged; there's no way to override just one
+default key while keeping the rest.
 
-Generates `--size-*` CSS variables and matching size classes. A CSS file is automatically injected into the build.
+```ts
+composeIcons: {
+  // sm/md/lg/xl from the defaults no longer exist — only these three do
+  iconSizes: {
+    small: '8px',
+    medium: '16px',
+    large: '32px',
+  },
+}
+```
+
+Generates `--size-*` CSS variables and matching size classes, ordered by real size regardless of
+declaration order. A CSS file is automatically injected into the build.
+
+### `defaultSize`
+
+- **Type:** `string`
+- **Default:** `'md'` if present in the resolved sizes, otherwise the first configured key
+
+The size key used when no `size` prop is passed to a generated component or `useComposeIcon`.
+Mainly useful once `iconSizes` replaces the defaults with a scale that has no `md` key:
+
+```ts
+composeIcons: {
+  iconSizes: { small: '8px', medium: '16px', large: '32px' },
+  defaultSize: 'medium',
+}
+```
+
+If `defaultSize` doesn't name a key that actually exists in the resolved sizes, the module logs
+a warning and falls back to `'md'`, then the first configured key.
 
 ### `includeComposables`
 
 - **Type:** `boolean`
 - **Default:** `true`
 - Auto-imports [`useComposeIcon`](/utilities/use-compose-icon) and [`useComposeIconTheme`](/utilities/use-compose-icon#usecomposeicontheme). Set to `false` if you only use the generated components and don't need these directly.
-
----
 
 ## Advanced options
 
@@ -122,8 +151,6 @@ These rarely need to be changed.
 | `reRunOnBuild` | `boolean` | `false`                                  | Re-generate icons on every build, bypassing the cache        |
 | `debug`        | `boolean` | `false`                                  | Show per-component generation logs during setup              |
 | `cacheDir`     | `string`  | `node_modules/.cache/nuxt-compose-icons` | SVG processing cache — speeds up rebuilds, safe to gitignore |
-
----
 
 ### `dryRun`
 
@@ -162,8 +189,6 @@ These rarely need to be changed.
    cacheDir: './.icon-cache',
  }
 ```
-
----
 
 ## CSS integration
 

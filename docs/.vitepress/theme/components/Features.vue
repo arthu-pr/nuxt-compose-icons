@@ -1,15 +1,17 @@
 <template>
   <YRow type="switcher" class="features">
-    <div v-for="feature in features" :key="feature.title" class="feature padding-md">
+    <YStack v-for="feature in features" :key="feature.title" class="feature padding-md gap-sm">
       <h3 class="feature__title">{{ feature.title }}</h3>
-      <Separator width="24px" no-margin />
-      <p v-for="value in feature.desc" :key="value" class="feature__desc">{{ value }}</p>
-    </div>
+      <Separator no-margin />
+      <ul class="feature__desc">
+        <li v-for="value in feature.desc" :key="value" class="">{{ value }}</li>
+      </ul>
+    </YStack>
   </YRow>
 </template>
 
 <script setup>
-import { YRow } from '@use-compose/ui';
+import { YRow, YStack } from '@use-compose/ui';
 import Separator from './Separator.vue';
 
 const features = [
@@ -65,13 +67,15 @@ const features = [
 
 .feature {
   display: grid;
-  grid-template-rows: 100px auto 1fr;
+  grid-template-rows: 50px auto 1fr;
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
-  --stack-gap: 0.25rem;
+  --_gutter: 0.25rem;
+  --_stack-gap: 0.25rem;
   gap: var(--stack-gap);
   justify-content: center;
+  padding: 1.25rem 1.5rem;
 
   &:last-child:nth-child(2n + 1) {
     grid-column-end: span 2;
@@ -96,5 +100,25 @@ const features = [
   color: var(--vp-c-text-2);
   margin: 0;
   line-height: 1.6;
+  list-style: disc inside;
+
+  li::marker {
+    color: var(--vp-c-text-2);
+  }
+
+  li {
+    transition: all 0.3s ease;
+
+    &:hover {
+      list-style: square inside;
+
+      &::marker {
+        color: var(--vp-c-brand-1);
+        display: block;
+        width: 1em;
+        height: 1em;
+      }
+    }
+  }
 }
 </style>

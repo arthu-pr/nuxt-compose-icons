@@ -27,26 +27,26 @@ yarn add -D nuxt-compose-icons
 
 ## 2. Register the module
 
-```ts
+```ts [nuxt.config.ts]
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['nuxt-compose-icons'],
 });
 ```
 
----
-
 ## 3. Provide icons
 
 Point the module at a folder of `.svg` icons:
 
 ```ts
-composeIcons: {
-  pathToIcons: './assets/icons',
-}
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['nuxt-compose-icons'],
+  composeIcons: {
+    pathToIcons: './assets/icons',
+  },
+});
 ```
-
----
 
 ## 4. Use your icons
 
@@ -56,8 +56,6 @@ composeIcons: {
   <user-badge-icon />
 </template>
 ```
-
----
 
 ## Next steps
 
