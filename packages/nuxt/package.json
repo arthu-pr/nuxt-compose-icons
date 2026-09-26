@@ -35,7 +35,7 @@
     "@vitest/coverage-v8": "4.1.11",
     "@vitest/ui": "4.1.11",
     "changelogen": "0.6.2",
-    "eslint": "9.39.5",
+    "eslint": "10.11.0",
     "nuxt": "4.5.2",
     "playwright-core": "1.58.2",
     "publint": "0.3.24",
