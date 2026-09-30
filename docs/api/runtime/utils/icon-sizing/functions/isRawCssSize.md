@@ -6,7 +6,7 @@
 function isRawCssSize(value): boolean;
 ```
 
-Defined in: [runtime/utils/icon-sizing.ts:98](https://github.com/arthu-pr/nuxt-compose-icons/blob/843421aff84e79e48016735f7f19a8698fd96c96/packages/nuxt/src/runtime/utils/icon-sizing.ts#L98)
+Defined in: [runtime/utils/icon-sizing.ts:98](https://github.com/arthu-pr/nuxt-compose-icons/blob/6188382cdd2d3f40fe0262391cb156afed384d19/packages/nuxt/src/runtime/utils/icon-sizing.ts#L98)
 
 ## Parameters
 
