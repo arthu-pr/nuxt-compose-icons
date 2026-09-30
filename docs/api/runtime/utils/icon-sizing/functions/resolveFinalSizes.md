@@ -6,7 +6,7 @@
 function resolveFinalSizes(iconSizes?): Record<string, string>;
 ```
 
-Defined in: [runtime/utils/icon-sizing.ts:54](https://github.com/arthu-pr/nuxt-compose-icons/blob/e460ac61f1d19cf56e8e9f6ab05705aecc8f91d2/packages/nuxt/src/runtime/utils/icon-sizing.ts#L54)
+Defined in: [runtime/utils/icon-sizing.ts:54](https://github.com/arthu-pr/nuxt-compose-icons/blob/843421aff84e79e48016735f7f19a8698fd96c96/packages/nuxt/src/runtime/utils/icon-sizing.ts#L54)
 
 Resolves the project's final size scale, shared by codegen's `size` prop default, the
 generated CSS, and the runtime fallback so all three agree on the same map.
