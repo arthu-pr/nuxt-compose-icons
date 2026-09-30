@@ -329,6 +329,11 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
     // below (step 11) — computing it independently in each place is how the prop default
     // once ended up hardcoded to 'md' instead of following the actual configured sizes.
     const finalSizes = resolveFinalSizes(iconSizes);
+    if (iconSizes && Object.keys(finalSizes).length === 0) {
+      throw new Error(
+        'composeIcons.iconSizes was provided but is empty — it must contain at least one size key, or be omitted entirely to use the defaults.',
+      );
+    }
     if (options.defaultSize && !(options.defaultSize in finalSizes)) {
       logger.warn(
         `defaultSize "${options.defaultSize}" is not a configured size key — falling back to 'md' or the first configured size.`,
