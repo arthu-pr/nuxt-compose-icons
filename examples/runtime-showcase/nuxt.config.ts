@@ -10,11 +10,10 @@ const options: NuxtComposeIconsOptions = {
   },
   includeComposables: true,
   iconSizes: {
-    xs: '0.5rem',
-    sm: '0.875rem',
+    sm: '0.5rem',
     md: '1rem',
-    lg: '2rem',
-    xl: '4rem',
+    lg: '3rem',
+    xl: '5rem',
   },
 };
 // https://nuxt.com/docs/api/configuration/nuxt-config
