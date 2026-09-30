@@ -73,7 +73,7 @@ const features = [
   border-radius: 8px;
   --_gutter: 0.25rem;
   --_stack-gap: 0.25rem;
-  gap: var(--stack-gap);
+  gap: var(--_stack-gap);
   justify-content: center;
   padding: 1.25rem 1.5rem;
 

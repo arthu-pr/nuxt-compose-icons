@@ -112,8 +112,7 @@ export interface NuxtComposeIconsOptions {
 
   /**
    * Icon sizes used to generate `--size-*` CSS variables and size classes.
-   * When provided, **fully replaces** the built-in defaults — this is your whole scale, not a
-   * patch on top of it. Omit entirely to use the defaults below unchanged.
+   * When provided, **fully replaces** the built-in defaults with your own whole scale
    *
    * defaults: {
    *  sm: '1.5rem',
