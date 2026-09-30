@@ -1,5 +1,31 @@
 # nuxt-compose-icons
 
+## 0.12.0
+
+### Minor Changes
+
+- 9904560: Full-replace `iconSizes`, a new `defaultSize` option, and a `useComposeIconTheme()` crash fix.
+
+  ## 💥 Breaking
+
+  `iconSizes` now fully replaces the built-in `sm`/`md`/`lg`/`xl` defaults when set, instead of merging on top of them — providing any sizes means that's your whole scale, not a patch on the defaults.
+
+  ## ✨ Features
+
+  New `defaultSize` option to control which key is used when no `size` prop is passed, useful once your scale has no `md` key.
+
+  ## 🐛 Fix
+
+  `useComposeIconTheme()` no longer crashes when called outside a real Nuxt app (e.g. Storybook, a plain Vue app) with the module's plugin never having run — it previously threw instead of gracefully falling back to `{}`.
+
+### Patch Changes
+
+- 045599d: Bumps `svgo` to fix two sanitization advisories.
+
+  ## 🔒 Security
+
+  Bumps `svgo` to `4.1.0`, fixing a `removeScripts` sanitization bypass (executable links via a namespace/control-character bypass, [GHSA-w27v-7q3p-w38r](https://github.com/advisories/GHSA-w27v-7q3p-w38r)) and an incomplete-sanitization issue for executable HTML inside `foreignObject` elements — both in the module's own SVG-sanitization step.
+
 ## 0.11.3
 
 ### Patch Changes
