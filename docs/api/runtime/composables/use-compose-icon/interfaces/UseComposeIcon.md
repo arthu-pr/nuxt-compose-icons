@@ -2,7 +2,7 @@
 
 # Interface: UseComposeIcon
 
-Defined in: [runtime/composables/use-compose-icon.ts:11](https://github.com/arthu-pr/nuxt-compose-icons/blob/1e9fd2af539e72dd9b760e58cdde9c48c8927ed7/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L11)
+Defined in: [runtime/composables/use-compose-icon.ts:11](https://github.com/arthu-pr/nuxt-compose-icons/blob/e460ac61f1d19cf56e8e9f6ab05705aecc8f91d2/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L11)
 
 ## Properties
 
@@ -12,7 +12,7 @@ Defined in: [runtime/composables/use-compose-icon.ts:11](https://github.com/arth
 buildSvgAttributes: (svgAttributes?) => SVGAttributes & object;
 ```
 
-Defined in: [runtime/composables/use-compose-icon.ts:14](https://github.com/arthu-pr/nuxt-compose-icons/blob/1e9fd2af539e72dd9b760e58cdde9c48c8927ed7/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L14)
+Defined in: [runtime/composables/use-compose-icon.ts:14](https://github.com/arthu-pr/nuxt-compose-icons/blob/e460ac61f1d19cf56e8e9f6ab05705aecc8f91d2/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L14)
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Defined in: [runtime/composables/use-compose-icon.ts:14](https://github.com/arth
 iconClasses: ComputedRef<ClassValue[]>;
 ```
 
-Defined in: [runtime/composables/use-compose-icon.ts:13](https://github.com/arthu-pr/nuxt-compose-icons/blob/1e9fd2af539e72dd9b760e58cdde9c48c8927ed7/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L13)
+Defined in: [runtime/composables/use-compose-icon.ts:13](https://github.com/arthu-pr/nuxt-compose-icons/blob/e460ac61f1d19cf56e8e9f6ab05705aecc8f91d2/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L13)
 
 ***
 
@@ -42,4 +42,4 @@ Defined in: [runtime/composables/use-compose-icon.ts:13](https://github.com/arth
 iconStyles: ComputedRef<StyleValue>;
 ```
 
-Defined in: [runtime/composables/use-compose-icon.ts:12](https://github.com/arthu-pr/nuxt-compose-icons/blob/1e9fd2af539e72dd9b760e58cdde9c48c8927ed7/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L12)
+Defined in: [runtime/composables/use-compose-icon.ts:12](https://github.com/arthu-pr/nuxt-compose-icons/blob/e460ac61f1d19cf56e8e9f6ab05705aecc8f91d2/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L12)

@@ -6,7 +6,7 @@
 function resolveDefaultSizeKey(iconSizes, defaultSize?): string;
 ```
 
-Defined in: [runtime/utils/icon-sizing.ts:75](https://github.com/arthu-pr/nuxt-compose-icons/blob/1e9fd2af539e72dd9b760e58cdde9c48c8927ed7/packages/nuxt/src/runtime/utils/icon-sizing.ts#L75)
+Defined in: [runtime/utils/icon-sizing.ts:75](https://github.com/arthu-pr/nuxt-compose-icons/blob/e460ac61f1d19cf56e8e9f6ab05705aecc8f91d2/packages/nuxt/src/runtime/utils/icon-sizing.ts#L75)
 
 Resolves the default size key: `defaultSize` if it names a real key, else `'md'` if present,
 else the first configured key — arbitrary (the smallest once sorted) but never crashes.

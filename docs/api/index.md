@@ -15,6 +15,15 @@
   <a href="_media/LICENSE"><img src="https://img.shields.io/github/license/arthu-pr/nuxt-compose-icons" alt="license" /></a>
 </p>
 
+CI gates every PR on unit + e2e tests, lint, and a full build (module, playground, showcase, docs) across Node 22 & 24 — not just formatting. → [Latest run](https://github.com/arthu-pr/nuxt-compose-icons/actions/workflows/ci.yml)
+
+```mermaid
+flowchart LR
+  L[Lint · Style · Format] --> B[Build<br/>module · playground · showcase · docs]
+  T[Unit + E2E Tests] --> B
+  B -->|push to main| D[Deploy docs & showcase]
+```
+
 This module generates fully customizable Vue components from your initial raw SVG files at build time, and gives you:
 
 - 🧩 The flexibility of raw SVG
@@ -151,6 +160,8 @@ Each icon is a real, standalone Vue component — not a runtime lookup like `@nu
 - Add a new icon, rebuild — no separate publish/sync step to keep a design system's icon set current
 
 → [Monorepo guide](https://nuxt-compose-icons.dev/guide/monorepo) — with a live example repo (Nx + pnpm)
+
+### Schema
 
 ## 📖 Documentation
 
