@@ -50,10 +50,24 @@ jobs:
             4. Skip anything already covered by an open Renovate PR - check
                with `gh pr list --search "renovate"` first.
 
-            If you find actionable issues, open a single GitHub issue titled
-            "Dependency audit: <date>" listing each finding with severity and
-            a recommended action. If nothing actionable is found, do not open
-            an issue - just end without creating one.
+            This audit maintains a single persistent issue titled exactly
+            "Dependency audit" (no date in the title) - the same pattern as
+            Renovate's own "Dependency Dashboard" issue in this repo. Before
+            doing anything else, check whether it already exists:
+
+              gh issue list --repo ${{ github.repository }} --search 'in:title "Dependency audit"' --state open
+
+            - If it exists, replace its entire body with your fresh findings
+              (`gh issue edit <number> --body-file <file>`) - don't append or
+              comment, the body should always reflect only the current state.
+              Start the body with "Last updated: <date>". Carry forward any
+              still-open item you re-verify as still true; drop anything now
+              resolved.
+            - If it doesn't exist yet and you have actionable findings, create
+              it with that exact title.
+            - If nothing actionable is found: if the issue exists, update its
+              body to say so (don't close it - Renovate's dashboard stays open
+              too); if it doesn't exist, don't create one.
 
             This is a read-only audit: do not modify any files, do not open
             or push to branches, do not open PRs.
