@@ -82,7 +82,13 @@
       <div class="controls__meta">{{ icons.length }} icons</div>
     </aside>
 
-    <main class="overview" :class="{ 'overview--hover-enabled': hoverEnabled }">
+    <main
+      class="overview"
+      :class="{
+        'overview--hover-enabled': hoverEnabled,
+        'overview--show-icon-names': showIconNames,
+      }"
+    >
       <!-- Rendered on the server too: icons are real components, so they appear
            before hydration and the e2e test can assert on the SSR markup. This grid is
            built entirely from the index.ts barrel (component.hasIndexFile: true) —
@@ -94,6 +100,7 @@
           :fill="fill"
           :stroke="stroke"
           :stroke-width="strokeWidth"
+          class="overview__icon"
         />
         <span class="overview__name">{{ icon.name }}</span>
       </div>
@@ -127,6 +134,8 @@ const strokeWidth = computed(() => (strokeWidthEnabled.value ? strokeWidthValue.
 
 const hoverEnabled = ref(false);
 const hoverColor = ref('#ffffff');
+
+const showIconNames = ref(true);
 </script>
 
 <style scoped>
@@ -214,7 +223,7 @@ const hoverColor = ref('#ffffff');
   display: flex;
   flex-direction: column;
   gap: 0.15em;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   color: var(--faint);
 }
 
@@ -244,7 +253,7 @@ const hoverColor = ref('#ffffff');
   min-width: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-  gap: var(--spacing-md);
+  gap: var(--spacing-xs);
   padding: var(--spacing-lg) var(--spacing-xl);
   background-color: var(--bg-overview);
   align-content: start;
@@ -255,6 +264,18 @@ const hoverColor = ref('#ffffff');
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-xs);
+}
+
+.overview--show-icon-names .overview__name {
+  display: block;
+}
+.overview__name {
+  display: none;
+}
+
+.overview__icon {
+  /* flex: 1; */
+  color: var(--faint);
 }
 
 .overview__name {
