@@ -2,6 +2,8 @@
 'nuxt-compose-icons': minor
 ---
 
+Full-replace `iconSizes`, a new `defaultSize` option, and a `useComposeIconTheme()` crash fix.
+
 ## 💥 Breaking
 
 `iconSizes` now fully replaces the built-in `sm`/`md`/`lg`/`xl` defaults when set, instead of merging on top of them — providing any sizes means that's your whole scale, not a patch on the defaults.
