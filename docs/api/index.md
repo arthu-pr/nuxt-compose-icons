@@ -113,7 +113,7 @@ bring-your-own-SVG like this module — but it's a runtime name-lookup (`<nuxt-i
 injecting SVG markup at render time) rather than generating standalone components, so it lands
 on the same side of that specific distinction as `@nuxt/icon`.
 
-Nuxt also has an excellent official icon module, [`@nuxt/icon`](https://github.com/nuxt/icon) — for a huge, ready-made icon set with zero setup, use it. This module solves a different problem: turning **your own** SVG files into **standalone, ownable Vue components**, for a design system or an in-house icon library, without the trade-offs above.
+Nuxt also has an official icon module, [`@nuxt/icon`](https://github.com/nuxt/icon) — for a huge, ready-made icon set with zero setup, use it. This module solves a different problem: turning **your own** SVG files into **standalone, ownable Vue components**, for a design system or an in-house icon library, without the trade-offs above.
 
 → [How this compares to `@nuxt/icon`](https://nuxt-compose-icons.dev/guide/features#how-this-compares-to-nuxt-icon) · [Common Approaches](https://nuxt-compose-icons.dev/guide/concept#common-approaches)
 

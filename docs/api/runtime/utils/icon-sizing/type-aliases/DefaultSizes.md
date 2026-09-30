@@ -6,7 +6,7 @@
 type DefaultSizes = ComposeIconSize & object;
 ```
 
-Defined in: [runtime/utils/icon-sizing.ts:9](https://github.com/arthu-pr/nuxt-compose-icons/blob/6188382cdd2d3f40fe0262391cb156afed384d19/packages/nuxt/src/runtime/utils/icon-sizing.ts#L9)
+Defined in: [runtime/utils/icon-sizing.ts:9](https://github.com/arthu-pr/nuxt-compose-icons/blob/f6c5550cc364da344004d0ddfcde0235133e7451/packages/nuxt/src/runtime/utils/icon-sizing.ts#L9)
 
 Default icon sizes if none have been provided to the module
 

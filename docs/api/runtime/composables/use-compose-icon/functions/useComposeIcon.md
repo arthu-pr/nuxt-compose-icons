@@ -6,7 +6,7 @@
 function useComposeIcon(props): UseComposeIcon;
 ```
 
-Defined in: [runtime/composables/use-compose-icon.ts:26](https://github.com/arthu-pr/nuxt-compose-icons/blob/6188382cdd2d3f40fe0262391cb156afed384d19/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L26)
+Defined in: [runtime/composables/use-compose-icon.ts:26](https://github.com/arthu-pr/nuxt-compose-icons/blob/f6c5550cc364da344004d0ddfcde0235133e7451/packages/nuxt/src/runtime/composables/use-compose-icon.ts#L26)
 
 Composes the icon styles, classes, and attributes based on the provided props.
 

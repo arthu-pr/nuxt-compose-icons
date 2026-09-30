@@ -66,7 +66,7 @@ this module against `@nuxt/icon`, here's a direct comparison:
 
 ## How This Compares to `@nuxt/icon`
 
-Nuxt already has an excellent official icon module, [`@nuxt/icon`](https://github.com/nuxt/icon) — if you want instant access to a huge, ready-made icon set (Iconify, emoji, custom collections) with zero setup, use it.
+Nuxt already has an official icon module, [`@nuxt/icon`](https://github.com/nuxt/icon) — if you want instant access to a huge, ready-made icon set (Iconify, emoji, custom collections) with zero setup, use it.
 
 `nuxt-compose-icons` solves a different problem: turning **your own** SVG files into **standalone, ownable Vue components** — for a design system or an in-house icon library, where the icons need to exist as real components in your codebase, not just a runtime lookup.
 
