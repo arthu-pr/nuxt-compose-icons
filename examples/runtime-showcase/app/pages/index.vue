@@ -1,6 +1,4 @@
 <template>
-  <GettingStarted />
-
   <div class="page">
     <aside class="controls">
       <div class="controls__field">
@@ -25,6 +23,9 @@
             >{{ s }}</span
           >
         </div>
+        <ul class="controls__legend">
+          <li v-for="s in sizes" :key="s">{{ s }}: {{ iconSizes[s] }}</li>
+        </ul>
       </div>
 
       <label class="controls__field">
@@ -65,10 +66,29 @@
         />
       </label>
 
+      <label class="controls__field">
+        <div class="controls__label-row">
+          <span class="controls__label">Hover color</span>
+          <input v-model="hoverEnabled" type="checkbox" class="controls__checkbox" />
+        </div>
+        <input
+          v-model="hoverColor"
+          type="color"
+          :disabled="!hoverEnabled"
+          class="controls__color"
+        />
+      </label>
+
       <div class="controls__meta">{{ icons.length }} icons</div>
     </aside>
 
-    <main class="overview">
+    <main
+      class="overview"
+      :class="{
+        'overview--hover-enabled': hoverEnabled,
+        'overview--show-icon-names': showIconNames,
+      }"
+    >
       <!-- Rendered on the server too: icons are real components, so they appear
            before hydration and the e2e test can assert on the SSR markup. This grid is
            built entirely from the index.ts barrel (component.hasIndexFile: true) —
@@ -80,6 +100,7 @@
           :fill="fill"
           :stroke="stroke"
           :stroke-width="strokeWidth"
+          class="overview__icon"
         />
         <span class="overview__name">{{ icon.name }}</span>
       </div>
@@ -90,7 +111,6 @@
 <script setup lang="ts">
 import { useComposeIconTheme } from 'nuxt-compose-icons/composables';
 import { computed, ref } from 'vue';
-import GettingStarted from '~/components/GettingStarted.vue';
 import * as IconComponents from '~/components/icons';
 
 const icons = Object.entries(IconComponents).map(([name, component]) => ({ name, component }));
@@ -111,6 +131,11 @@ const stroke = computed(() => (strokeEnabled.value ? strokeColor.value : undefin
 const strokeWidthEnabled = ref(false);
 const strokeWidthValue = ref(1.5);
 const strokeWidth = computed(() => (strokeWidthEnabled.value ? strokeWidthValue.value : undefined));
+
+const hoverEnabled = ref(false);
+const hoverColor = ref('#ffffff');
+
+const showIconNames = ref(true);
 </script>
 
 <style scoped>
@@ -191,6 +216,17 @@ const strokeWidth = computed(() => (strokeWidthEnabled.value ? strokeWidthValue.
   color: var(--brand);
 }
 
+.controls__legend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
 .controls__checkbox {
   accent-color: var(--brand);
 }
@@ -217,7 +253,7 @@ const strokeWidth = computed(() => (strokeWidthEnabled.value ? strokeWidthValue.
   min-width: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-  gap: var(--spacing-md);
+  gap: var(--spacing-xs);
   padding: var(--spacing-lg) var(--spacing-xl);
   background-color: var(--bg-overview);
   align-content: start;
@@ -230,11 +266,28 @@ const strokeWidth = computed(() => (strokeWidthEnabled.value ? strokeWidthValue.
   gap: var(--spacing-xs);
 }
 
+.overview--show-icon-names .overview__name {
+  display: block;
+}
+.overview__name {
+  display: none;
+}
+
+.overview__icon {
+  /* flex: 1; */
+  color: var(--faint);
+}
+
 .overview__name {
   font-size: 0.65rem;
   color: var(--faint);
   text-align: center;
   word-break: break-word;
+}
+
+.overview--hover-enabled .overview__cell:hover :deep(.compose-icon) {
+  --icon-fill: v-bind(hoverColor);
+  --icon-stroke: v-bind(hoverColor);
 }
 
 @media (width <= 640px) {
