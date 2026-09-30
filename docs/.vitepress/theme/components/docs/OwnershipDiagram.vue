@@ -7,25 +7,25 @@
         time</span
       >
     </div>
-    <div class="arrow"><span class="arrow-shape arrow-down"></span></div>
+    <div class="arrow">
+      <span class="arrow-shape arrow-down"></span>
+    </div>
     <div class="node node-data">SVG source assets</div>
-    <span class="sub">Source of truth for icons</span>
-    <div class="arrow"><span class="arrow-shape arrow-down"></span></div>
+    <div class="arrow" data-text="Source of truth for icons">
+      <span class="arrow-shape arrow-down"></span>
+    </div>
 
     <div class="module-boundary">
       <div class="boundary-label">UI Library package</div>
-      <div class="row">
-        <div class="node node-data">SVG assets</div>
-        <div class="arrow">
-          <span class="arrow-label">nuxt-compose-icons</span>
-          <span class="arrow-shape arrow-right"></span>
-        </div>
-        <div class="node">Generated, themed components</div>
+      <div class="node node-data">SVG assets</div>
+      <div class="arrow" data-text="nuxt-compose-icons">
+        <span class="arrow-shape arrow-down"></span>
       </div>
+      <div class="node">Generated, themed components</div>
     </div>
-    <div class="arrow">
+    <div class="arrow" data-text="developers import components only">
       <span class="arrow-shape arrow-down"></span>
-      <span class="arrow-label">developers import components only</span>
+      <span class="arrow-label"></span>
     </div>
 
     <div class="actor-wrap">
@@ -85,7 +85,7 @@
   .role {
     display: inline-block;
     border: 1px solid var(--vp-c-brand-1);
-    border-radius: 999px;
+    /* border-radius: 999px; */
     color: white;
     background-color: var(--vp-c-brand-1);
     font-weight: 700;
@@ -110,7 +110,7 @@
     gap: 0;
     border: 2px solid var(--vp-c-brand-1);
     border-radius: 40px;
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.5rem;
     max-width: 380px;
   }
 
@@ -128,6 +128,8 @@
       font-weight: 600;
       font-size: 0.8rem;
       color: var(--vp-c-brand-1);
+      align-self: flex-start;
+      transform: translateY(-50%);
     }
   }
 
@@ -137,7 +139,22 @@
     justify-content: center;
     gap: 0.4rem;
     margin: 0.5rem 0;
+    position: relative;
+    width: 100%;
 
+    &::after {
+      content: attr(data-text);
+      /* display: block; */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%);
+      font-size: 0.75rem;
+      line-height: 1;
+      color: var(--vp-c-text-2);
+      margin-bottom: 0.25rem;
+      padding-left: 0.5rem;
+    }
     .arrow-label {
       font-size: 0.75rem;
       line-height: 1;

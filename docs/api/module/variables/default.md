@@ -6,4 +6,4 @@
 default: NuxtModule<NuxtComposeIconsOptions, NuxtComposeIconsOptions, false>;
 ```
 
-Defined in: [module.ts:200](https://github.com/arthu-pr/nuxt-compose-icons/blob/d141366874a5b246cf368a85d6ae85bef35b9d9a/packages/nuxt/src/module.ts#L200)
+Defined in: [module.ts:202](https://github.com/arthu-pr/nuxt-compose-icons/blob/843421aff84e79e48016735f7f19a8698fd96c96/packages/nuxt/src/module.ts#L202)
