@@ -3,6 +3,20 @@
 Guidance for AI agents working in `packages/nuxt`, the published `nuxt-compose-icons`
 module. See [`../../CLAUDE.md`](../../CLAUDE.md) for repo-wide commands and conventions.
 
+## What this module does
+
+At build time it walks a directory of raw SVG files and generates fully
+customizable Vue components, themed via CSS custom properties on the root
+`<svg>` (deliberately no wrapper `<div>` — children can be themed individually).
+Two output modes are both first-class, not one "preferred" and one legacy:
+
+- `.nuxt` — generated components live in the build cache, for small setups.
+- `component.destDir` — components are versioned in-repo, for using this as a
+  design-system base (this is the real-world use case it was built for).
+
+Icons are auto-imported in **both** modes; do not propose collapsing the two
+modes or making one conditional on the other.
+
 ## Layout
 
 | Path                                    | What                                                                                               |
