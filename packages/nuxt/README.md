@@ -1,6 +1,10 @@
-<img width="1408" height="423" alt="Frame 207" src="https://github.com/user-attachments/assets/4f2a1f2a-57f0-49ca-bf56-075d3df9d043" />
+<a href="https://nuxt-compose-icons.dev" >
+<img width="1408" height="423" alt="Nuxt Compose Icons Banner" src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/nuxt-compose-icons-banner.svg" />
+</a>
 
-<p align="center">
+# Nuxt-Compose-Icons
+
+<p>
   <a href="https://npmjs.com/package/nuxt-compose-icons"><img src="https://img.shields.io/npm/v/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D" alt="npm version" /></a>
   <a href="https://npmjs.com/package/nuxt-compose-icons"><img src="https://img.shields.io/npm/dm/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D" alt="monthly downloads" /></a>
   <a href="https://npmjs.com/package/nuxt-compose-icons"><img src="https://img.shields.io/npm/dt/nuxt-compose-icons.svg?style=flat&colorA=000&colorB=C1272D" alt="total downloads" /></a>
@@ -11,9 +15,19 @@
   <a href="LICENSE"><img src="https://img.shields.io/github/license/arthu-pr/nuxt-compose-icons" alt="license" /></a>
 </p>
 
----
+<details>
+<summary>CI coverage</summary>
 
-# Nuxt-Compose-Icons
+CI gates every PR on unit + e2e tests, lint, and a full build (module, playground, showcase, docs) across Node 22 & 24 — not just formatting. → [Latest run](https://github.com/arthu-pr/nuxt-compose-icons/actions/workflows/ci.yml)
+
+```mermaid
+flowchart LR
+  L[Lint · Style · Format] --> B[Build<br/>module · playground · showcase · docs]
+  T[Unit + E2E Tests] --> B
+  B -->|push to main| D[Deploy docs & showcase]
+```
+
+</details>
 
 This module generates fully customizable Vue components from your initial raw SVG files at build time, and gives you:
 
@@ -26,8 +40,6 @@ This module generates fully customizable Vue components from your initial raw SV
 For building design systems or simply use in-house icons.
 
 <img height="24" alt="image" src="https://github.com/user-attachments/assets/0c9ff8dc-e688-41fa-856a-41a18e972a54" style="padding-right: 10px" align="left" /> Used in production at [reteach](https://www.reteach.com/)
-
----
 
 ## 📦 Installation
 
@@ -49,8 +61,6 @@ Using yarn
 yarn add nuxt-compose-icons
 ```
 
----
-
 ## 🛠 Quick start
 
 **1. Add to `nuxt.config.ts`:**
@@ -69,13 +79,13 @@ export default defineNuxtConfig({
 **3. Use them anywhere — no imports needed:**
 
 ```vue
-<ArrowUpIcon size="md" color="var(--primary)" />
-<UserBadgeIcon size="lg" fill="currentColor" />
+<template>
+  <ArrowUpIcon size="md" color="var(--primary)" />
+  <UserBadgeIcon size="lg" fill="currentColor" />
+</template>
 ```
 
 That's it. Every `.svg` becomes a typed, auto-imported Vue component.
-
----
 
 ## 🎯 Motivation
 
@@ -85,11 +95,27 @@ Existing icon solutions often force trade-offs between DX, accessibility, and fl
 2. **Manual Vue components** → repetitive and hard to scale
 3. **SVG loaders** → flexible but lack structure and typing
 
+| Feature                | Third-party Libraries        | Manual Vue Components | SVG Loaders (`vite-svg-loader`) | **Nuxt Compose Icons**      |
+| ---------------------- | ---------------------------- | --------------------- | ------------------------------- | --------------------------- |
+| **Setup**              | ✅ Easy                      | ⚠️ Manual             | ⚠️ Requires config              | ✅ Minimal                  |
+| **Source of truth**    | External package             | Vue files             | SVG files                       | SVG files                   |
+| **SVG output**         | Clean (often wrapped)        | Custom                | Inline                          | Clean, no wrappers          |
+| **SVG control**        | Often abstracted             | ✅ Full               | ✅ Full                         | ✅ Full                     |
+| **Theming**            | ⚠️ Prop-based, limited       | ✅ Manual CSS         | ✅ CSS-based                    | ✅ CSS variables + props    |
+| **Naming consistency** | Library-defined              | Developer-defined     | File-based                      | Deterministic, file-based   |
+| **Typing**             | ✅ Provided                  | ✅ Manual             | Depends on setup                | ✅ Generated & inferred     |
+| **Scaling**            | Dependent on library updates | Maintenance-heavy     | Flexible but unstructured       | Structured, build-generated |
+| **Nuxt integration**   | ✅ Works                     | ✅ Auto-importable    | ⚠️ Requires configuration       | ✅ Native auto-import       |
+
+`@nuxt/icon` is the most common example of the "Third-party Libraries" column above.
+[`nuxt-icons`](https://github.com/gitFoxCode/nuxt-icons) doesn't fit that column — it's
+bring-your-own-SVG like this module — but it's a runtime name-lookup (`<nuxt-icon name="..." />`
+injecting SVG markup at render time) rather than generating standalone components, so it lands
+on the same side of that specific distinction as `@nuxt/icon`.
+
 Nuxt also has an excellent official icon module, [`@nuxt/icon`](https://github.com/nuxt/icon) — for a huge, ready-made icon set with zero setup, use it. This module solves a different problem: turning **your own** SVG files into **standalone, ownable Vue components**, for a design system or an in-house icon library, without the trade-offs above.
 
-→ Full writeup: [Motivation](https://nuxt-icons.use-compose.com/guide/motivation) · [Common Approaches](https://nuxt-icons.use-compose.com/guide/concept#common-approaches) · [How this compares to `@nuxt/icon`](https://nuxt-icons.use-compose.com/guide/features#how-this-compares-to-nuxt-icon)
-
----
+→ [How this compares to `@nuxt/icon`](https://nuxt-compose-icons.dev/guide/features#how-this-compares-to-nuxt-icon) · [Common Approaches](https://nuxt-compose-icons.dev/guide/concept#common-approaches)
 
 ## Features
 
@@ -117,18 +143,20 @@ Nuxt also has an excellent official icon module, [`@nuxt/icon`](https://github.c
     <path d="..." />
   </svg>
 </template>
-
-<!-- Theme it -->
-<UserBadgeIcon stroke="blue" fill="red" size="lg" />
 ```
 
-→ Full feature list with examples, and [how this compares to `@nuxt/icon`](https://nuxt-icons.use-compose.com/guide/features)
+```vue
+<!-- Theme it -->
+<template>
+  <UserBadgeIcon stroke="blue" fill="red" size="lg" />
+</template>
+```
 
----
+→ [Full feature list with examples](https://nuxt-compose-icons.dev/guide/features)
 
 ## Own your components
 
-Each icon is a real, standalone Vue component — not a runtime lookup like `<Icon name="my:user-badge" />`. That distinction matters once icons need to live outside a single Nuxt app:
+Each icon is a real, standalone Vue component — not a runtime lookup like `@nuxt/icon`'s `<Icon name="my:user-badge" />` or `nuxt-icons`' `<nuxt-icon name="user-badge" />`. That distinction matters once icons need to live outside a single Nuxt app:
 
 - The generated `.vue`/`.ts` files are committed to your repo, versioned like any other component
 - A UI library can ship `<UserBadgeIcon />` directly — apps that consume the UI library never install or configure `nuxt-compose-icons` themselves (the UI library still does, as a normal dependency, since the generated components import from it)
@@ -136,25 +164,27 @@ Each icon is a real, standalone Vue component — not a runtime lookup like `<Ic
 - Add `component.hasIndexFile: true` for an `index.ts` barrel that re-exports every icon — one import for the whole set
 - Add a new icon, rebuild — no separate publish/sync step to keep a design system's icon set current
 
-This is the intended use case: a design system or in-house icon library where icons are source-controlled assets, not an external dependency.
+→ [Monorepo guide](https://nuxt-compose-icons.dev/guide/monorepo) — with a live example repo (Nx + pnpm)
 
-→ Full walkthrough, CI wiring, and a live example repo (Nx + pnpm): [Monorepo guide](https://nuxt-icons.use-compose.com/guide/monorepo)
+<a href="https://nuxt-compose-icons.dev/guide/monorepo">
+<img src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/ownership-icons.png" alt="Design owns the SVG source assets; nuxt-compose-icons generates themed components into a shared UI library;  developers only import them into their apps" width="720" />
+</a>
 
----
+### Schema
 
 ## 📖 Documentation
 
 Full documentation and advanced configuration:
 
-👉 [https://nuxt-icons.use-compose.com](https://nuxt-icons.use-compose.com/)
+👉 [https://nuxt-compose-icons.dev](https://nuxt-compose-icons.dev/)
 
 ---
+
+> > > > > > > 27d19cf (iconSizes refactor option - full replace)
 
 ## ▶️ Try it
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/arthu-pr/nuxt-compose-icons/tree/main/examples/runtime-showcase)
-
----
 
 ## 🗺 Roadmap
 

@@ -15,8 +15,6 @@ Theming can be done during:
 
 The **recommended** approach is to define a global icon theme in your CSS or design tokens, and then override it at runtime with props when needed.
 
----
-
 ## 💡 Concept
 
 Each icon component uses CSS variables to control its visual properties:

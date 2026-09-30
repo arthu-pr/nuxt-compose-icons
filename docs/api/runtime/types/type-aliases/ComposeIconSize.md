@@ -3,7 +3,7 @@
 # Type Alias: ComposeIconSize
 
 ```ts
-type ComposeIconSize = Record<string | number | symbol, unknown>;
+type ComposeIconSize = Record<string, string>;
 ```
 
-Defined in: [runtime/types/icon-sizes.ts:1](https://github.com/arthu-pr/nuxt-compose-icons/blob/d141366874a5b246cf368a85d6ae85bef35b9d9a/packages/nuxt/src/runtime/types/icon-sizes.ts#L1)
+Defined in: [runtime/types/icon-sizes.ts:1](https://github.com/arthu-pr/nuxt-compose-icons/blob/6188382cdd2d3f40fe0262391cb156afed384d19/packages/nuxt/src/runtime/types/icon-sizes.ts#L1)

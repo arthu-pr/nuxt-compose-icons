@@ -13,16 +13,12 @@ Icons in user interfaces come with several challenges:
 - **Performance**: Avoid too long loading times and large bundle sizes.
 - **Customization**: Adapt to different themes and brandings
 
----
-
 A typical approach is to create an **icon component library** — a collection of reusable UI components that can be used by developers to build user interfaces:
 
 - **Auto-imported** like any other component
 - **Typed** for IDE autocompletion and safety
 - **Styled consistently** via classes or CSS variables
 - **Reusable** across different components and pages
-
----
 
 ## Common Approaches
 
@@ -70,8 +66,6 @@ Example output:
 | + Predefined icon sets | Limited styling flexibility                     |
 | + Standardized API     | Icons may not match your brand or design system |
 |                        | Styling often relies on props or global rules   |
-
----
 
 ### 2. Manual `.vue` components
 

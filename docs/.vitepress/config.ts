@@ -18,6 +18,7 @@ const sidebar = {
     {
       text: 'Utilities',
       items: [
+        { text: 'Sizing', link: '/utilities/sizing' },
         { text: 'Composables', link: '/utilities/use-compose-icon' },
         { text: 'Interactivity', link: '/utilities/interactivity' },
         { text: 'Theming', link: '/utilities/theming' },

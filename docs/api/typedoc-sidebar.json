@@ -66,17 +66,27 @@
             ]
           },
           {
-            "text": "use-compose-icons-registry",
-            "link": "/api/runtime/composables/use-compose-icons-registry/",
+            "text": "use-compose-icon-theme",
+            "link": "/api/runtime/composables/use-compose-icon-theme/",
             "collapsed": false,
             "items": [
+              {
+                "text": "Interfaces",
+                "collapsed": false,
+                "items": [
+                  {
+                    "text": "ComposeIconTheme",
+                    "link": "/api/runtime/composables/use-compose-icon-theme/interfaces/ComposeIconTheme.md"
+                  }
+                ]
+              },
               {
                 "text": "Functions",
                 "collapsed": false,
                 "items": [
                   {
-                    "text": "useComposeIconRegistry",
-                    "link": "/api/runtime/composables/use-compose-icons-registry/functions/useComposeIconRegistry.md"
+                    "text": "useComposeIconTheme",
+                    "link": "/api/runtime/composables/use-compose-icon-theme/functions/useComposeIconTheme.md"
                   }
                 ]
               }
@@ -116,8 +126,8 @@
         "collapsed": false,
         "items": [
           {
-            "text": "icon-theming",
-            "link": "/api/runtime/utils/icon-theming/",
+            "text": "icon-sizing",
+            "link": "/api/runtime/utils/icon-sizing/",
             "collapsed": false,
             "items": [
               {
@@ -126,7 +136,7 @@
                 "items": [
                   {
                     "text": "DefaultSizes",
-                    "link": "/api/runtime/utils/icon-theming/type-aliases/DefaultSizes.md"
+                    "link": "/api/runtime/utils/icon-sizing/type-aliases/DefaultSizes.md"
                   }
                 ]
               },
@@ -136,7 +146,7 @@
                 "items": [
                   {
                     "text": "iconSizeDefault",
-                    "link": "/api/runtime/utils/icon-theming/variables/iconSizeDefault.md"
+                    "link": "/api/runtime/utils/icon-sizing/variables/iconSizeDefault.md"
                   }
                 ]
               },
@@ -146,11 +156,19 @@
                 "items": [
                   {
                     "text": "getIconSizeClass",
-                    "link": "/api/runtime/utils/icon-theming/functions/getIconSizeClass.md"
+                    "link": "/api/runtime/utils/icon-sizing/functions/getIconSizeClass.md"
                   },
                   {
                     "text": "isRawCssSize",
-                    "link": "/api/runtime/utils/icon-theming/functions/isRawCssSize.md"
+                    "link": "/api/runtime/utils/icon-sizing/functions/isRawCssSize.md"
+                  },
+                  {
+                    "text": "resolveDefaultSizeKey",
+                    "link": "/api/runtime/utils/icon-sizing/functions/resolveDefaultSizeKey.md"
+                  },
+                  {
+                    "text": "resolveFinalSizes",
+                    "link": "/api/runtime/utils/icon-sizing/functions/resolveFinalSizes.md"
                   }
                 ]
               }
