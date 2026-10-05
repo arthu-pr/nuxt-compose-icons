@@ -21,7 +21,7 @@
   "dependencies": {
     "@nuxt/kit": "4.5.2",
     "defu": "6.1.7",
-    "svg-parser": "2.0.5",
+    "svg-parser": "2.1.0",
     "svgo": "4.1.0"
   },
   "devDependencies": {
