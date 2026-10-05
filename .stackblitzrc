@@ -1,0 +1,6 @@
+{
+  "startCommand": "pnpm showcase",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
