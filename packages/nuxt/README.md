@@ -39,23 +39,18 @@ This module generates fully customizable Vue components from your initial raw SV
 
 For building design systems or simply use in-house icons.
 
-<img height="24" alt="image" src="https://github.com/user-attachments/assets/0c9ff8dc-e688-41fa-856a-41a18e972a54" style="padding-right: 10px" align="left" /> Used in production at [reteach](https://www.reteach.com/)
+<img height="24" alt="image" src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/reteach.svg" style="padding-right: 10px" align="left" /> 
+**Used in production at [reteach](https://www.reteach.com/)**
 
 ## 📦 Installation
-
-Using pnpm:
 
 ```bash
 pnpm add nuxt-compose-icons
 ```
 
-Using npm
-
 ```bash
 npm install nuxt-compose-icons
 ```
-
-Using yarn
 
 ```bash
 yarn add nuxt-compose-icons
@@ -167,20 +162,14 @@ Each icon is a real, standalone Vue component — not a runtime lookup like `@nu
 → [Monorepo guide](https://nuxt-compose-icons.dev/guide/monorepo) — with a live example repo (Nx + pnpm)
 
 <a href="https://nuxt-compose-icons.dev/guide/monorepo">
-<img src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/ownership-icons.png" alt="Design owns the SVG source assets; nuxt-compose-icons generates themed components into a shared UI library;  developers only import them into their apps" width="720" />
+<img src="https://github.com/arthu-pr/nuxt-compose-icons/tree/main/.github/assets/ownership-icons.svg" alt="Design owns the SVG source assets; nuxt-compose-icons generates themed components into a shared UI library;  developers only import them into their apps" width="720" />
 </a>
-
-### Schema
 
 ## 📖 Documentation
 
 Full documentation and advanced configuration:
 
 👉 [https://nuxt-compose-icons.dev](https://nuxt-compose-icons.dev/)
-
----
-
-> > > > > > > 27d19cf (iconSizes refactor option - full replace)
 
 ## ▶️ Try it
 
