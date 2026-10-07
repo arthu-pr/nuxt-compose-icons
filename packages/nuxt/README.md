@@ -15,6 +15,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/github/license/arthu-pr/nuxt-compose-icons" alt="license" /></a>
 </p>
 
+
+
 <details>
 <summary>CI coverage</summary>
 
@@ -29,6 +31,8 @@ flowchart LR
 
 </details>
 
+
+
 This module generates fully customizable Vue components from your initial raw SVG files at build time, and gives you:
 
 - 🧩 The flexibility of raw SVG
@@ -41,6 +45,14 @@ For building design systems or simply use in-house icons.
 
 <img height="24" alt="image" src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/reteach.svg" style="padding-right: 10px" align="left" /> 
 **Used in production at [reteach](https://www.reteach.com/)**
+
+---
+
+ 📖 [Documentation and advanced configuration](https://nuxt-compose-icons.dev/) | 🗺 [Potential features and Roadmap](https://github.com/users/arthu-pr/projects/7/views/1)
+ 
+
+[[▶️ Try it in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/arthu-pr/nuxt-compose-icons/tree/main/examples/runtime-showcase)
+
 
 ## 📦 Installation
 
@@ -162,19 +174,6 @@ Each icon is a real, standalone Vue component — not a runtime lookup like `@nu
 → [Monorepo guide](https://nuxt-compose-icons.dev/guide/monorepo) — with a live example repo (Nx + pnpm)
 
 <a href="https://nuxt-compose-icons.dev/guide/monorepo">
-<img src="https://github.com/arthu-pr/nuxt-compose-icons/tree/main/.github/assets/ownership-icons.svg" alt="Design owns the SVG source assets; nuxt-compose-icons generates themed components into a shared UI library;  developers only import them into their apps" width="720" />
+<img src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/ownership-icons.svg" alt="Design owns the SVG source assets; nuxt-compose-icons generates themed components into a shared UI library;  developers only import them into their apps" width="720" />
 </a>
 
-## 📖 Documentation
-
-Full documentation and advanced configuration:
-
-👉 [https://nuxt-compose-icons.dev](https://nuxt-compose-icons.dev/)
-
-## ▶️ Try it
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/arthu-pr/nuxt-compose-icons/tree/main/examples/runtime-showcase)
-
-## 🗺 Roadmap
-
-👉 [GitHub Projects](https://github.com/users/arthu-pr/projects/7/views/1)
