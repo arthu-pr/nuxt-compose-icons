@@ -47,7 +47,7 @@
     "@commitlint/config-conventional": "20.5.3",
     "@eslint/js": "9.39.5",
     "@nuxt/kit": "4.5.2",
-    "@nuxt/test-utils": "4.3.2",
+    "@nuxt/test-utils": "4.3.3",
     "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-vue": "10.11.1",
@@ -63,7 +63,7 @@
     "stylelint-config-standard-scss": "17.0.0",
     "syncpack": "14.3.1",
     "typedoc": "0.28.20",
-    "typedoc-plugin-markdown": "4.11.0",
+    "typedoc-plugin-markdown": "4.13.1",
     "typedoc-vitepress-theme": "1.1.4",
     "typescript": "6.0.3",
     "typescript-eslint": "8.58.2",
@@ -86,5 +86,5 @@
     ],
     "**/*": "prettier --write --ignore-unknown"
   },
-  "packageManager": "pnpm@10.33.4"
+  "packageManager": "pnpm@10.34.6"
 }
