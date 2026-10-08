@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "separateMinorPatch": true,
+  "prConcurrentLimit": 5,
   "addLabels": ["dependencies"],
   "branchPrefix": "renovate/",
   "packageRules": [
@@ -12,7 +12,13 @@
       "automergeType": "pr"
     },
     {
-      "matchDepTypes": ["dependencies", "devDependencies"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["minor"],
       "automerge": false
     }
