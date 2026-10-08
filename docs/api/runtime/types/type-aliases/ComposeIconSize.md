@@ -6,4 +6,4 @@
 type ComposeIconSize = Record<string, string>;
 ```
 
-Defined in: [runtime/types/icon-sizes.ts:1](https://github.com/arthu-pr/nuxt-compose-icons/blob/6188382cdd2d3f40fe0262391cb156afed384d19/packages/nuxt/src/runtime/types/icon-sizes.ts#L1)
+Defined in: [runtime/types/icon-sizes.ts:1](https://github.com/arthu-pr/nuxt-compose-icons/blob/9e5625692fa6620a845208e4a7950c169c786b90/packages/nuxt/src/runtime/types/icon-sizes.ts#L1)

@@ -15,8 +15,6 @@
   <a href="LICENSE"><img src="https://img.shields.io/github/license/arthu-pr/nuxt-compose-icons" alt="license" /></a>
 </p>
 
-
-
 <details>
 <summary>CI coverage</summary>
 
@@ -30,8 +28,6 @@ flowchart LR
 ```
 
 </details>
-
-
 
 This module generates fully customizable Vue components from your initial raw SVG files at build time, and gives you:
 
@@ -48,11 +44,9 @@ For building design systems or simply use in-house icons.
 
 ---
 
- 📖 [Documentation and advanced configuration](https://nuxt-compose-icons.dev/) | 🗺 [Potential features and Roadmap](https://github.com/users/arthu-pr/projects/7/views/1)
- 
+📖 [Documentation and advanced configuration](https://nuxt-compose-icons.dev/) | 🗺 [Potential features and Roadmap](https://github.com/users/arthu-pr/projects/7/views/1)
 
-[[▶️ Try it in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/arthu-pr/nuxt-compose-icons/tree/main/examples/runtime-showcase)
-
+[![▶️ Try it in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/arthu-pr/nuxt-compose-icons/tree/main/examples/runtime-showcase)
 
 ## 📦 Installation
 
@@ -176,4 +170,3 @@ Each icon is a real, standalone Vue component — not a runtime lookup like `@nu
 <a href="https://nuxt-compose-icons.dev/guide/monorepo">
 <img src="https://raw.githubusercontent.com/arthu-pr/nuxt-compose-icons/main/.github/assets/ownership-icons.svg" alt="Design owns the SVG source assets; nuxt-compose-icons generates themed components into a shared UI library;  developers only import them into their apps" width="720" />
 </a>
-
