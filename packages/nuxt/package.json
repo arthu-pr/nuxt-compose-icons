@@ -1,7 +1,7 @@
 {
   "name": "nuxt-compose-icons",
   "description": "Nuxt module that generates fully customizable Vue components from raw SVG files at build time, with theming via CSS variables",
-  "version": "0.11.3",
+  "version": "0.12.0",
   "author": "Arthur Plazanet <plazanet.art@gmail.com>",
   "private": false,
   "scripts": {
@@ -21,7 +21,7 @@
   "dependencies": {
     "@nuxt/kit": "4.5.2",
     "defu": "6.1.7",
-    "svg-parser": "2.0.5",
+    "svg-parser": "2.1.0",
     "svgo": "4.1.0"
   },
   "devDependencies": {
@@ -29,8 +29,8 @@
     "@nuxt/eslint-config": "1.17.0",
     "@nuxt/module-builder": "1.0.3",
     "@nuxt/schema": "4.5.2",
-    "@nuxt/test-utils": "4.3.2",
-    "@types/node": "26.6.3",
+    "@nuxt/test-utils": "4.3.3",
+    "@types/node": "26.6.4",
     "@types/svg-parser": "2.0.6",
     "@vitest/coverage-v8": "4.1.11",
     "@vitest/ui": "4.1.11",
