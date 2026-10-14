@@ -42,7 +42,7 @@
     "typedoc": "typedoc"
   },
   "devDependencies": {
-    "@changesets/cli": "2.31.1",
+    "@changesets/cli": "3.0.3",
     "@commitlint/cli": "20.5.3",
     "@commitlint/config-conventional": "20.5.3",
     "@eslint/js": "9.39.5",
