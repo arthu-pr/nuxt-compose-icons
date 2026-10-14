@@ -29,4 +29,15 @@ describe('generateComponentName', () => {
     expect(generateComponentName('my-icon_123', moduleOptionsMock)).toBe('MyIcon123');
     expect(generateComponentName('my-icon_123', options)).toBe('MyIcon123');
   });
+
+  test.each(['arrow-up', 'arrow_up', 'arrow up', 'Arrow Up'])(
+    'normalizes separator and case variants of %s to the same component name',
+    (name) => {
+      expect(generateComponentName(name, { suffix: 'Icon' })).toBe('ArrowUpIcon');
+    },
+  );
+
+  test.each(['flèche', 'fleche'])('normalizes accent variants of %s', (name) => {
+    expect(generateComponentName(name, { suffix: 'Icon' })).toBe('FlecheIcon');
+  });
 });
