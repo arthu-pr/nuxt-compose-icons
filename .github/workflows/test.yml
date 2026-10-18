@@ -43,6 +43,26 @@ jobs:
           path: packages/nuxt/test/coverage
           retention-days: 30
 
+  test-nuxt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+        with:
+          node_version: ${{ inputs.node_version }}
+          cache: pnpm
+
+      - name: Build module
+        run: pnpm prepack
+
+      - name: Run nuxt-context tests
+        run: pnpm exec vitest run --project nuxt
+
   test-e2e:
     runs-on: ubuntu-latest
     steps:
