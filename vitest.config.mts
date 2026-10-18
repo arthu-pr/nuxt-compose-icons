@@ -29,6 +29,13 @@ export default defineConfig({
         test: {
           name: 'nuxt',
           include: ['**/test/nuxt/**/*.{test,spec}.ts', '**/*.nuxt.{test,spec}.ts'],
+          environmentOptions: {
+            nuxt: {
+              rootDir: fileURLToPath(
+                new URL('./packages/nuxt/test/nuxt/fixtures/basic', import.meta.url),
+              ),
+            },
+          },
         },
       }),
       {

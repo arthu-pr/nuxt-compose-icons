@@ -16,6 +16,7 @@ pnpm dev            # playground
 pnpm showcase       # examples/runtime-showcase
 pnpm docs:dev       # VitePress docs site
 pnpm test:unit      # vitest --project unit
+pnpm test:nuxt      # vitest --project nuxt (mountSuspended, real Nuxt context)
 pnpm test:e2e       # vitest --project e2e
 pnpm lint           # eslint
 pnpm lint:style     # stylelint

@@ -1,3 +1,5 @@
+import { defineVitestProject } from '@nuxt/test-utils/config';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -14,6 +16,17 @@ export default defineConfig({
           environment: 'node',
         },
       },
+      await defineVitestProject({
+        test: {
+          name: 'nuxt',
+          include: ['test/nuxt/**/*.{test,spec}.ts', '*.nuxt.{test,spec}.ts'],
+          environmentOptions: {
+            nuxt: {
+              rootDir: fileURLToPath(new URL('./test/nuxt/fixtures/basic', import.meta.url)),
+            },
+          },
+        },
+      }),
       {
         test: {
           name: 'e2e',
