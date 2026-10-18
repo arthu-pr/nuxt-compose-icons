@@ -19,7 +19,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@nuxt/kit": "4.6.0",
+    "@nuxt/kit": "4.6.1",
     "defu": "6.1.7",
     "svg-parser": "2.1.0",
     "svgo": "4.1.0"
@@ -28,21 +28,21 @@
     "@nuxt/devtools": "3.4.2",
     "@nuxt/eslint-config": "1.17.0",
     "@nuxt/module-builder": "1.0.3",
-    "@nuxt/schema": "4.6.0",
+    "@nuxt/schema": "4.6.1",
     "@nuxt/test-utils": "4.3.3",
-    "@types/node": "26.6.4",
+    "@types/node": "26.6.5",
     "@types/svg-parser": "2.0.6",
     "@vitest/coverage-v8": "4.1.11",
     "@vitest/ui": "4.1.11",
     "changelogen": "0.6.2",
     "eslint": "9.39.5",
-    "nuxt": "4.6.0",
+    "nuxt": "4.6.1",
     "playwright-core": "1.64.0",
     "publint": "0.3.25",
     "typescript": "6.0.3",
     "vitest": "4.1.11",
     "vue": "3.5.43",
-    "vue-tsc": "3.2.9"
+    "vue-tsc": "3.3.13"
   },
   "engines": {
     "node": ">=22.0.0"
