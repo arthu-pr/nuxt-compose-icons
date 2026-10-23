@@ -11,7 +11,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "nuxt": "4.5.1"
+    "nuxt": "4.6.1"
   },
   "devDependencies": {
     "@nuxt/test-utils": "4.3.3",

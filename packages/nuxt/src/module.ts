@@ -381,6 +381,7 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
      * SVGO (step 2) is skipped for any SVG whose content hash matches the persistent cache.
      */
     const svgFiles = files.filter((f) => path.parse(f).ext === '.svg');
+    const componentSources = new Map<string, string>();
 
     const generatedComponents: Component[] = await Promise.all(
       svgFiles.map(async (filePath) => {
@@ -388,6 +389,14 @@ export default defineNuxtModule<NuxtComposeIconsOptions>({
 
         // 1. Component name derived from filename + naming options (computed once)
         const componentName = generateComponentName(fileInfo.name, options.component ?? {});
+        const previousSource = componentSources.get(componentName);
+        if (previousSource !== undefined) {
+          logger.warn(
+            `nuxt-compose-icons: "${previousSource}" and "${filePath}" both generate "${componentName}". Rename one of these SVG files to avoid overwriting the generated component.`,
+          );
+        } else {
+          componentSources.set(componentName, filePath);
+        }
 
         // 2. Parse the content (as HTML string)
         const rawSvg = await fsp.readFile(filePath, 'utf-8');
