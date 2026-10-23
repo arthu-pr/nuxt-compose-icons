@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "prConcurrentLimit": 5,
+  "minimumReleaseAge": "3 days",
   "addLabels": ["dependencies"],
   "branchPrefix": "renovate/",
   "packageRules": [

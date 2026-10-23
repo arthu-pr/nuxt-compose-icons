@@ -11,12 +11,20 @@ permissions:
 
 jobs:
   label:
+    # Fork and Dependabot PRs receive read-only tokens; maintainers label them manually.
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.actor != 'dependabot[bot]' &&
+      github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Determine label from branch prefix
         id: branch_label
+        env:
+          BRANCH_REF: ${{ github.head_ref }}
         run: |
-          ref="${{ github.head_ref }}"
+          ref="$BRANCH_REF"
+          label=""; color=""; description=""
           case "$ref" in
             feature/*) label="feature";       color="0e8a16"; description="Branched from feature/*" ;;
             fix/*)     label="bug";           color="d73a4a"; description="Branched from fix/*" ;;
