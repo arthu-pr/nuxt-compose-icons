@@ -40,9 +40,9 @@ jobs:
         id: changesets
         uses: changesets/action@v2.1.2
         with:
-          version: pnpm changeset version
-          publish: pnpm release
-          createGithubReleases: true
+          version-script: pnpm changeset version
+          publish-script: pnpm release
+          create-github-releases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
